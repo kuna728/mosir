@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import logo from "../../../assets/images/logo_#1976d2.png"
+import logo from "../../../assets/images/logo_topbar.png"
 
 const pages = ['Sporty', 'Trenerzy', 'Bilety', 'Karnety', 'Sale', 'Sprzęt sportowy'];
 
@@ -29,8 +29,8 @@ function ResponsiveAppBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2, width: 40, height: 40}}>
-                        <img src={logo}/>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: 36, height: 36}}>
+                        <img src={logo} alt="Logo"/>
                     </Box>
                     <Typography
                         variant="h6"
@@ -85,7 +85,9 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, width: 36, height: 36}}>
+                        <img src={logo} alt="Logo"/>
+                    </Box>
                     <Typography
                         variant="h5"
                         noWrap
@@ -116,7 +118,11 @@ function ResponsiveAppBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0}}>
-                        Logowanie
+                        <Button
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Logowanie
+                        </Button>
                     </Box>
                 </Toolbar>
             </Container>
