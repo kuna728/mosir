@@ -2,6 +2,7 @@ package pl.edu.wat.student.i9g1s1.mosir.domain;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,5 +24,8 @@ public class Hall {
 
     @ManyToOne
     private HallType hallType;
+
+    @OneToMany(mappedBy = "hall")
+    private Set<RosterEntry> entries;
 
 }

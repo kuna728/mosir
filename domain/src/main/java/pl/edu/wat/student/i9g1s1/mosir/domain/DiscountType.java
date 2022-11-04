@@ -24,4 +24,7 @@ public class DiscountType {
 
     @ManyToMany(mappedBy = "discountTypes")
     private Set<Ticket> tickets;
+
+    @ManyToMany(mappedBy = "discountTypes")
+    private Set<MembershipCard> membershipCards;
 }
