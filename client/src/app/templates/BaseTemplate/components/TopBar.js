@@ -9,12 +9,21 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import logo from "../../../assets/images/logo_topbar.png"
+import {Link, useNavigate} from "react-router-dom";
 
-const pages = ['Sporty', 'Trenerzy', 'Bilety', 'Karnety', 'Sale', 'Sprzęt sportowy'];
+const pages = [
+    {label: 'Sporty', href: "/sporty"},
+    {label: 'Trenerzy', href: "/trenerzy"},
+    {label: "Bilety", href: '/bilety'},
+    {label: 'Sale', href: '/sale'},
+    {label: 'Sprzęt sportowy', href: '/sprzet-sportowy'}
+];
 
 function ResponsiveAppBar() {
+
+    const navigate = useNavigate();
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -23,6 +32,11 @@ function ResponsiveAppBar() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const handleMenuButtonClick = href => {
+        handleCloseNavMenu();
+        navigate(href);
+    }
 
 
     return (
@@ -46,9 +60,10 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        MOSIR
+                        <Link to="/">
+                            MOSIR
+                        </Link>
                     </Typography>
-
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -79,8 +94,8 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem key={page.label} onClick={() => handleMenuButtonClick(page.href)}>
+                                    <Typography textAlign="center">{page.label}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -103,16 +118,18 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        MOSIR
+                        <Link to="/">
+                            MOSIR
+                        </Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
+                                key={page.label}
+                                onClick={() => handleMenuButtonClick(page.href)}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                {page}
+                                {page.label}
                             </Button>
                         ))}
                     </Box>
@@ -120,6 +137,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0}}>
                         <Button
                             sx={{ my: 2, color: 'white', display: 'block' }}
+                            onClick={() => navigate("/logowanie")}
                         >
                             Logowanie
                         </Button>

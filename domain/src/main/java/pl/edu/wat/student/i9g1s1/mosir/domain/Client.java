@@ -20,15 +20,15 @@ public class Client {
     private User user;
 
     @OneToMany(mappedBy = "client")
-    private Set<ClientsTicket> clientsTickets;
+    private List<ClientsTicket> clientsTickets;
 
     @OneToMany(mappedBy = "client")
-    private Set<ClientsMembershipCard> clientsMembershipCards;
+    private List<ClientsMembershipCard> clientsMembershipCards;
 
     @OneToMany(mappedBy = "client")
-    private Set<Opinion> opinions;
+    private List<Opinion> opinions;
 
     @OneToMany(mappedBy = "client")
-    private Set<RosterEntry> entries;
+    private List<RosterEntry> entries;
 
 }

@@ -2,6 +2,7 @@ package pl.edu.wat.student.i9g1s1.mosir.domain;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -16,6 +17,9 @@ public class Hall {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    @Column(name = "slug", length = 60, nullable = false)
+    private String slug;
+
     @Column(name = "hall_number", length = 10, nullable = false, unique = true)
     private String number;
 
@@ -23,9 +27,9 @@ public class Hall {
     private String description;
 
     @ManyToOne
-    private HallType hallType;
+    private ActivityType activityType;
 
     @OneToMany(mappedBy = "hall")
-    private Set<RosterEntry> entries;
+    private List<RosterEntry> entries;
 
 }

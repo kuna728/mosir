@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,9 +23,9 @@ public class Ticket {
     private ActivityType activityType;
 
     @ManyToMany
-    private Set<DiscountType> discountTypes;
+    private List<DiscountType> discountTypes;
 
     @OneToMany(mappedBy = "ticket")
-    private Set<ClientsTicket> clientsTickets;
+    private List<ClientsTicket> clientsTickets;
 
 }

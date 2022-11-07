@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class RosterEntry {
     private Hall hall;
 
     @ManyToMany
-    private Set<SportsEquipment> sportsEquipments;
+    private List<SportsEquipment> sportsEquipments;
 
     @ManyToOne
     private ActivityType activityType;

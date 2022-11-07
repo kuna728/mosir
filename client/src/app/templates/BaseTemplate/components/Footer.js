@@ -1,15 +1,24 @@
 import React from "react";
-import {Box, Container, Divider, Grid, Typography} from "@mui/material";
+import {Box, Container, Divider, Grid, Link, Typography} from "@mui/material";
 import logo from "../../../assets/images/logo_footer.png";
 import Button from "@mui/material/Button";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import {useNavigate} from "react-router-dom";
 
 
-const pages = ['Regulamin', 'FAQ', 'Dojazd', 'Kontakt'];
+const pages = [
+    {label: 'Regulamin', href: "/regulamin"},
+    {label: 'FAQ', href: "/faq"},
+    {label: 'Dojazd', href: "/dojazd"},
+    {label: 'Kontakt', href: "/kontakt"}
+];
 
 export default function Footer() {
+
+    const navigate = useNavigate();
+
     return (
         <Box
             component="footer"
@@ -41,10 +50,11 @@ export default function Footer() {
                             <Box sx={{display: "flex", justifyContent: {xs: "center", md: "flex-end"}}}>
                                 {pages.map((page) => (
                                     <Button
-                                        key={page}
+                                        key={page.label}
                                         sx={{ my: 2, color: 'black', display: 'block' }}
+                                        onClick={() => navigate(page.href)}
                                     >
-                                        {page}
+                                        {page.label}
                                     </Button>
                                 ))}
                             </Box>
@@ -59,18 +69,18 @@ export default function Footer() {
                     </Grid>
                     <Grid item xs={12} md={6} order={{xs: 4, md: 5}}>
                         <Box sx={{display: "flex", justifyContent: {xs: "center", md: "flex-end"}}}>
-                            <FacebookOutlinedIcon sx={{width: 36, height: 36}}/>
-                            <InstagramIcon sx={{width: 36, height: 36, ml: 2}}/>
-                            <GitHubIcon sx={{width: 36, height: 36, ml: 2}}/>
+                            <Link href="https://www.facebook.com" target="_blank" color="inherit">
+                                <FacebookOutlinedIcon sx={{width: 36, height: 36}}/>
+                            </Link>
+                            <Link href="https://www.instagram.com" target="_blank" color="inherit">
+                                <InstagramIcon sx={{width: 36, height: 36, ml: 2}}/>
+                            </Link>
+                            <Link href="https://github.com/kuna728/mosir" target="_blank" color="inherit">
+                                <GitHubIcon sx={{width: 36, height: 36, ml: 2}}/>
+                            </Link>
                         </Box>
                     </Grid>
                 </Grid>
-                {/*<Container maxWidth="sm">*/}
-                {/*    <Typography variant="body1">*/}
-                {/*        My sticky footer can be found here.*/}
-                {/*    </Typography>*/}
-                {/*    <Copyright />*/}
-                {/*</Container>*/}
             </Container>
         </Box>
     )

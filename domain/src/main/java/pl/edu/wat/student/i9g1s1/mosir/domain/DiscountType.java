@@ -16,15 +16,15 @@ public class DiscountType {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name", length = 50, nullable = false, unique = true)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "value", precision = 2, scale = 2, nullable = false)
+    @Column(name = "value", precision = 3, scale = 2, nullable = false)
     private BigDecimal value;
 
     @ManyToMany(mappedBy = "discountTypes")
-    private Set<Ticket> tickets;
+    private List<Ticket> tickets;
 
     @ManyToMany(mappedBy = "discountTypes")
-    private Set<MembershipCard> membershipCards;
+    private List<MembershipCard> membershipCards;
 }
