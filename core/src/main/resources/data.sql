@@ -163,7 +163,27 @@ insert into hall values (1, 'Integer id ligula quam. Sed et eros a tortor maximu
 insert into hall values (2, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
                           'Basen rekreacyjny', '101B', 'basen-rekreacyjny', 1);
 insert into hall values (3, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
-                         'Sala do jogi', '112', 'sala-do-jogi', 2);
+                         'Mała sala do jogi (wewnątrz)', '201', 'sala-do-jogi-mala-wewnatrz', 2);
+insert into hall values (4, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Duża sala do jogi (wewnątrz)', '113', 'sala-do-jogi-duza-wewnatrz', 2);
+insert into hall values (5, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Ogród do jogi (na zewnątrz)', '005', 'sala-do-jogi-zewnatrz', 2);
+insert into hall values (6, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Stoły do tenisa stolowego', '202', 'sala-do-tenisa-stolowego', 3);
+insert into hall values (7, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Stadion lekkoatletyczny', '001', 'sala-do-lekkoatletyki-zewnatrz', 4);
+insert into hall values (8, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Hala do lekkiej atletyki', '104', 'sala-do-lekkoatletyki-wewnatrz', 4);
+insert into hall values (9, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Siłownia', '102', 'silownia', 5);
+insert into hall values (10, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Sala do szermierki', '103', 'sala-do-szermierki', 6);
+insert into hall values (11, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Boisko do tenisa (na zewnątrz)', '003', 'sala-do-tenisa-zewnatrz', 7);
+insert into hall values (12, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Hala do tenisa (wewnątrz)', '203', 'sala-do-tenisa-wewnatrz', 7);
+insert into hall values (13, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Ścianka wspinaczkowa', '105', 'sala-do-wspinaczki', 8);
 
 
 

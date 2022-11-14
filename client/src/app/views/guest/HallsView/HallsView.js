@@ -31,7 +31,7 @@ export default function HallsView() {
                 {halls.data.map(hall => (
                     <Grid item xs={12} md={6} lg={4}>
                         <Card>
-                            <CardHeader title={hall.name} subheader={hall.number} />
+                            <CardHeader title={hall.name} subheader={`Sala numer ${hall.number}`} />
                             <CardMedia
                                 component="img"
                                 image={BASE_URL + hall.imageUrl}
