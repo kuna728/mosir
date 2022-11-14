@@ -8,6 +8,8 @@ import {NOT_FOUND, NOT_IMPLEMENTED} from "./app/utils/constans";
 import ActivitiesView from "./app/views/guest/ActivitiesView";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import CoachesView from "./app/views/guest/CoachesView/CoachesView";
+import TicketsView from "./app/views/guest/TicketsView/TicketsView";
+import HallsView from "./app/views/guest/HallsView/HallsView";
 
 function App() {
 
@@ -26,8 +28,8 @@ function App() {
                     <Route path="/kontakt" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
                     <Route path="/sporty" exact element={<ActivitiesView />} />
                     <Route path="/trenerzy" exact element={<CoachesView />} />
-                    <Route path="/bilety" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/sale" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                    <Route path="/bilety" exact element={<TicketsView />} />
+                    <Route path="/sale" exact element={<HallsView />} />} />
                     <Route path="/sprzet-sportowy" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
                     <Route path="*" element={<ErrorView status={NOT_FOUND}/>}/>
                 </Route>

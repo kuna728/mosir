@@ -1,6 +1,3 @@
--- delete from ACTIVITY_TYPE;
--- delete from MOSIR_USER;
-
 -- activity types
 insert into ACTIVITY_TYPE values (1, 'Marzyłeś o pływaniu w świetnie wyposażonym obiekcie i wspaniałej atmosferze? Zapraszamy do mosiru!',
                                      'Pływanie', 'plywanie');
@@ -98,25 +95,25 @@ insert into discount_type values (4, 'studencki', 0.5);
 insert into ticket values (1, 20, 1);
 insert into ticket_discount_types values (1, 1);
 insert into ticket_discount_types values (1, 3);
-insert into ticket values (2, 16, 1);
+insert into ticket values (2, 16, 2);
 insert into ticket_discount_types values (2, 1);
-insert into ticket values (3, 40, 1);
+insert into ticket values (3, 40, 3);
 insert into ticket_discount_types values (3, 1);
 insert into ticket_discount_types values (3, 2);
 insert into ticket_discount_types values (3, 4);
-insert into ticket values (4, 30, 1);
+insert into ticket values (4, 30, 4);
 insert into ticket_discount_types values (4, 1);
-insert into ticket values (5, 20, 1);
+insert into ticket values (5, 20, 5);
 insert into ticket_discount_types values (5, 1);
 insert into ticket_discount_types values (5, 3);
 insert into ticket_discount_types values (5, 4);
-insert into ticket values (6, 50, 1);
+insert into ticket values (6, 50, 6);
 insert into ticket_discount_types values (6, 1);
 insert into ticket_discount_types values (6, 2);
-insert into ticket values (7, 24, 1);
+insert into ticket values (7, 24, 7);
 insert into ticket_discount_types values (7, 1);
 insert into ticket_discount_types values (7, 3);
-insert into ticket values (8, 30, 1);
+insert into ticket values (8, 30, 8);
 insert into ticket_discount_types values (8, 1);
 insert into ticket_discount_types values (8, 2);
 insert into ticket_discount_types values (8, 4);
@@ -160,13 +157,13 @@ insert into membership_card_discount_types values (12, 2);
 insert into membership_card_discount_types values (12, 4);
 
 --halls
-insert into hall values (1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla finibus sem nisl, a tristique odio porttitor eu. ' ||
-                             'Donec mattis eget lectus eu pellentesque. Nullam eu turpis a ex consequat accumsan. Curabitur urna urna, scelerisque ' ||
-                             'id rutrum ac, varius in risus. Integer non dolor est. Nam nisl arcu, sodales et pretium id, cursus vitae lorem. Sed sodales' ||
-                             ' nec ligula vel consectetur. Nulla facilisi. Aenean vitae ornare felis, in tempus ligula. Quisque euismod a ante vel bibendum',
+insert into hall values (1, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Basen rekreacyjny', '101B', 'basen-rekreacyjny',
                           'Basen sportowy', '101A', 'basen-sportowy', 1);
 insert into hall values (2, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
                           'Basen rekreacyjny', '101B', 'basen-rekreacyjny', 1);
+insert into hall values (3, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
+                         'Sala do jogi', '112', 'sala-do-jogi', 2);
 
 
 

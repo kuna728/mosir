@@ -1,14 +1,14 @@
 import React from "react";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import swimming_image from "../../../../assets/images/home_gallery/image1.jpg";
-import yoga_image from "../../../../assets/images/home_gallery/image2.jpg";
-import table_tennis_image from "../../../../assets/images/home_gallery/image3.jpg";
-import athletics_image from "../../../../assets/images/home_gallery/image4.jpg";
-import gym_image from "../../../../assets/images/home_gallery/image5.jpg"
-import fencing_image from "../../../../assets/images/home_gallery/image6.jpg"
-import tennis_image from "../../../../assets/images/home_gallery/image7.jpg"
-import climbing_image from "../../../../assets/images/home_gallery/image8.jpg"
+import swimming_image from "../../../../assets/images/home_gallery/plywanie.jpg";
+import yoga_image from "../../../../assets/images/home_gallery/joga.jpg";
+import table_tennis_image from "../../../../assets/images/home_gallery/tenis-stolowy.jpg";
+import athletics_image from "../../../../assets/images/home_gallery/lekkoatletyka.jpg";
+import gym_image from "../../../../assets/images/home_gallery/silownia.jpg"
+import fencing_image from "../../../../assets/images/home_gallery/szermierka.jpg"
+import tennis_image from "../../../../assets/images/home_gallery/tenis.jpg"
+import climbing_image from "../../../../assets/images/home_gallery/wspinaczka.jpg"
 
 export default function ImageGallery() {
     return (
