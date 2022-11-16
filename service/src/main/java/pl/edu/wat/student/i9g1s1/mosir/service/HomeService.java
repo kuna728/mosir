@@ -52,8 +52,7 @@ public class HomeService {
 
     public List<SportsEquipmentDTO> getSportsEquipments() {
         return sportsEquipmentRepository.findAll().stream()
-                .map(sportsEquipment -> new SportsEquipmentDTO(sportsEquipment,
-                        staticFilesService.getImageUrl("sport_equipment", sportsEquipment.getSlug())))
+                .map(sportsEquipment -> new SportsEquipmentDTO(sportsEquipment))
                 .collect(Collectors.toList());
     }
 }

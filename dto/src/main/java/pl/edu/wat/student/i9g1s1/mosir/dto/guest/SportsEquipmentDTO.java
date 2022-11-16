@@ -11,12 +11,10 @@ public class SportsEquipmentDTO {
     private final String name;
     private final String model;
     private final String activityType;
-    private final String imageUrl;
 
-    public SportsEquipmentDTO(SportsEquipment sportsEquipment, String imageUrl) {
+    public SportsEquipmentDTO(SportsEquipment sportsEquipment) {
         this.name = sportsEquipment.getName();
         this.model = sportsEquipment.getModel();
         this.activityType = sportsEquipment.getActivityType().getName();
-        this.imageUrl = imageUrl;
     }
 }

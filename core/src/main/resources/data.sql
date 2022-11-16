@@ -185,6 +185,46 @@ insert into hall values (12, 'Integer id ligula quam. Sed et eros a tortor maxim
 insert into hall values (13, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
                          'Ścianka wspinaczkowa', '105', 'sala-do-wspinaczki', 8);
 
+--sports equipments
+insert into sports_equipment values (1, 'SwimDesk 2000', 'Deska do pływania', '1111111111', 'swimdesk-2000', 1);
+insert into sports_equipment values (2, 'SwimDesk 3000', 'Deska do pływania', '1111111112', 'swimdesk-3000', 1);
+insert into sports_equipment values (3, 'SwimDesk Pro 5000', 'Deska do pływania', '1111111113', 'swimdesk-pro-5000', 1);
+insert into sports_equipment values (4, 'SwimGlass A12', 'Okulary do pływania', '1111111121', 'swimglass-a12', 1);
+insert into sports_equipment values (5, 'SwimFlippers 200 Adult', 'Płetwy', '1111111131', 'swimflippers-200-adult', 1);
+insert into sports_equipment values (6, 'SwimFlippers 200 Kid', 'Płetwy', '1111111132', 'swimflippers-200-kid', 1);
+insert into sports_equipment values (7, ' YogMat SM', 'Mata do jogi (mała)', '2111111111', 'yogmat-sm', 2);
+insert into sports_equipment values (8, ' YogMat XL', 'Mata do jogi (duża)', '2111111112', 'yogmat-xl', 2);
+insert into sports_equipment values (9, ' TableRackets 100 basic', 'Paletki do tenisa stołowego', '3111111111', 'tablerackets-100-basic', 3);
+insert into sports_equipment values (10, ' TableRackets 200 basic', 'Paletki do tenisa stołowego', '3111111112', 'tablerackets-200-basic', 3);
+insert into sports_equipment values (11, ' TableRackets 200 pro', 'Paletki do tenisa stołowego', '3111111113', 'tablerackets-200-pro', 3);
+insert into sports_equipment values (12, ' TableBall', 'Piłeczka do tenisa stołowego', '3111111121', 'tableball', 3);
+insert into sports_equipment values (13, ' Table 98', 'Stół do tenisa stołowego', '3111111131', 'table-98', 3);
+insert into sports_equipment values (14, ' Table 99', 'Stół do tenisa stołowego', '3111111132', 'table-99', 3);
+insert into sports_equipment values (15, ' Timer sport', 'Stoper', '4111111111', 'timer-sport', 4);
+insert into sports_equipment values (16, ' Jumpers 210', 'Płotki do skakania', '4111111121', 'jumpers-210', 4);
+insert into sports_equipment values (17, ' ThrowBall 400', 'Kula', '4111111131', 'throwball-400', 4);
+insert into sports_equipment values (18, ' ThrowHammer 400', 'Młot', '4111111141', 'throwball-400', 4);
+insert into sports_equipment values (19, ' JumpStick 400', 'Tyczka', '4111111151', 'jumpstick-400', 4);
+insert into sports_equipment values (20, ' Dumbbell 1kg', 'Hantle 1kg', '5111111111', 'dumbbell-1kg', 5);
+insert into sports_equipment values (21, ' Dumbbell 2kg', 'Hantle 2kg', '5111111112', 'dumbbell-2kg', 5);
+insert into sports_equipment values (22, ' Dumbbell 5kg', 'Hantle 5kg', '5111111113', 'dumbbell-5kg', 5);
+insert into sports_equipment values (23, ' Helmet 300', 'Kask', '6111111111', 'helmet-300', 6);
+insert into sports_equipment values (24, ' Fencing Suit 300S', 'Kombinezon rozm. S', '6111111121', 'fencing-suit-300s', 6);
+insert into sports_equipment values (25, ' Fencing Suit 300M', 'Kombinezon rozm. M', '6111111122', 'fencing-suit-300m', 6);
+insert into sports_equipment values (26, ' Fencing Suit 300L', 'Kombinezon rozm. L', '6111111123', 'fencing-suit-300l', 6);
+insert into sports_equipment values (27, ' Fencing Sword 45cm', 'Miecz 45cm', '6111111131', 'fencing-sword-45cm', 6);
+insert into sports_equipment values (28, ' Fencing Sword 60cm', 'Miecz 60cm', '6111111132', 'fencing-sword-60cm', 6);
+insert into sports_equipment values (29, ' TennisBall', 'Piłka do tenisa', '7111111111', 'tennisball', 7);
+insert into sports_equipment values (30, ' TennisRackets 190', 'Paletki do tenisa', '7111111121', 'tennisrackets-190', 7);
+insert into sports_equipment values (31, ' TennisRackets 190xPRO', 'Paletki do tenisa', '7111111122', 'tennisrackets-190-xpro', 7);
+insert into sports_equipment values (32, ' TennisMachine', 'Wyrzutnia piłek', '7111111131', 'tennismachine', 7);
+insert into sports_equipment values (33, ' TennisMachine xSPEED', 'Wyrzutnia piłek', '7111111132', 'tennismachine-xspeed', 7);
+insert into sports_equipment values (35, ' ClimbingChains', 'Łańcuchy do wspinaczki', '8111111111', 'climbing-chains', 8);
+insert into sports_equipment values (36, ' ClimbingHelmet', 'Kask', '8111111121', 'climbing-helmet', 8);
+
+
+
+
 
 
 
