@@ -18,7 +18,7 @@ export default function ActivitiesView() {
 
     return activities.isLoading ? <LinearProgress /> : activities.isError ? <ErrorView status={SERVER_ERROR} /> : (
         <Box>
-            <Box sx={{mt: {sx: 2, md: 7}}}>
+            <Box sx={{mt: {xs: 2, md: 7}}}>
                 <Typography variant="h2" component="h1" gutterBottom>
                     Sporty
                 </Typography>

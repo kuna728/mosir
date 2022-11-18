@@ -19,7 +19,7 @@ export default function HallsView() {
     const halls = useHalls();
 
     return halls.isLoading ? <LinearProgress /> : halls.isError ? <ErrorView status={SERVER_ERROR} /> : (
-        <Box sx={{mt: {sx: 2, md: 7}, mb: 5}}>
+        <Box sx={{mt: {xs: 2, md: 7}, mb: 5}}>
             <Typography variant="h2" component="h1" gutterBottom>
                 Sale
             </Typography>

@@ -6,7 +6,7 @@ import ImageGallery from "./components/ImageGallery";
 export default function HomeView() {
     return (
         <Box>
-            <Box sx={{mt: {sx: 2, md: 7}}}>
+            <Box sx={{mt: {xs: 2, md: 7}}}>
                 <Typography variant="h2" component="h1" gutterBottom>
                     Sport i rekreacja
                 </Typography>
