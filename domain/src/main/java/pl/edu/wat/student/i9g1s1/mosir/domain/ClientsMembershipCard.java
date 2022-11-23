@@ -22,6 +22,9 @@ public class ClientsMembershipCard {
     @JoinColumn(name = "membership_card_id")
     private MembershipCard membershipCard;
 
+    @ManyToOne
+    private DiscountType discountType;
+
     @Column(name = "purchased_at")
     private LocalDateTime purchasedAt;
 

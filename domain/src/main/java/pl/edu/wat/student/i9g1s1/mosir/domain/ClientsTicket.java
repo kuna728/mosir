@@ -22,6 +22,9 @@ public class ClientsTicket {
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 
+    @ManyToOne
+    private DiscountType discountType;
+
     @Column(name = "purchased_at")
     private LocalDateTime purchasedAt;
 

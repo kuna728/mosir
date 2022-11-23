@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "coach")
@@ -20,7 +19,7 @@ public class Coach {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private MosirUser user;
 
     @Column(name = "is_manager")
     private Boolean isManager;

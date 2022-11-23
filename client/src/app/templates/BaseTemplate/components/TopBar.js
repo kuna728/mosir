@@ -11,6 +11,10 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import logo from "../../../assets/images/logo_topbar.png"
 import {Link, useNavigate} from "react-router-dom";
+import {AuthContext} from "../../../auth/AuthContext";
+import {ROLE_GUEST} from "../../../utils/constans";
+import {AccountCircle} from "@mui/icons-material";
+import {Divider} from "@mui/material";
 
 const pages = [
     {label: 'Sporty', href: "/sporty"},
@@ -20,24 +24,46 @@ const pages = [
     {label: 'Sprzęt sportowy', href: '/sprzet-sportowy'}
 ];
 
-function ResponsiveAppBar() {
+const user_pages = [
+    {label: 'Mój mosir', href: "/moj-mosir"},
+    {label: 'Zajęcia', href: "/zajecia"},
+    {label: 'Bilety', href: "/moje-bilety"},
+]
 
+function TopBar() {
+
+    const auth = React.useContext(AuthContext);
     const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElRight, setAnchorElRight] = React.useState(null);
 
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = event => {
         setAnchorElNav(event.currentTarget);
     };
+
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
     const handleMenuButtonClick = href => {
         handleCloseNavMenu();
+        handleCloseRightMenu();
         navigate(href);
     }
 
+    const handleOpenRightMenu = event => {
+        setAnchorElRight(event.currentTarget)
+    }
+
+    const handleCloseRightMenu = () => {
+        setAnchorElRight(null);
+    }
+
+    const handleLogoutButtonClick = () => {
+        auth.logout();
+        navigate("/");
+    }
 
     return (
         <AppBar position="static">
@@ -67,16 +93,13 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
                         <Menu
-                            id="menu-appbar"
+                            id="left-menu"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
                                 vertical: 'bottom',
@@ -135,16 +158,52 @@ function ResponsiveAppBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0}}>
-                        <Button
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                            onClick={() => navigate("/logowanie")}
-                        >
-                            Logowanie
-                        </Button>
+                        {auth.role === ROLE_GUEST ? (
+                            <Button
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                onClick={() => navigate("/logowanie")}
+                            >
+                                Logowanie
+                            </Button>
+                        ) : (
+                            <div>
+                                <IconButton
+                                    size="large"
+                                    onClick={handleOpenRightMenu}
+                                    color="inherit"
+                                >
+                                <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    id="right-menu"
+                                    anchorEl={anchorElRight}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElRight)}
+                                    onClose={handleCloseRightMenu}
+                                >
+                                    {user_pages.map((page) => (
+                                        <MenuItem key={page.label} onClick={() => handleMenuButtonClick(page.href)}>
+                                            <Typography textAlign="center">{page.label}</Typography>
+                                        </MenuItem>
+                                    ))}
+                                    <MenuItem onClick={handleLogoutButtonClick}>
+                                        <Typography textAlign="center">Wyloguj</Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </div>
+                        )}
                     </Box>
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
-export default ResponsiveAppBar;
+export default TopBar;

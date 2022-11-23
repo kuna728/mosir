@@ -1,5 +1,5 @@
 import React from "react";
-import useHalls from "../../../query/hooks/useHalls";
+import useHalls from "../../query/hooks/useHalls";
 import {
     Box,
     Card,
@@ -11,8 +11,8 @@ import {
     LinearProgress,
     Typography
 } from "@mui/material";
-import ErrorView from "../ErrorView";
-import {BASE_URL, SERVER_ERROR} from "../../../utils/constans";
+import ErrorView from "./ErrorView";
+import {BASE_URL, SERVER_ERROR} from "../../utils/constans";
 import Button from "@mui/material/Button";
 
 export default function HallsView() {

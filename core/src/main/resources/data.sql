@@ -222,7 +222,20 @@ insert into sports_equipment values (33, ' TennisMachine xSPEED', 'Wyrzutnia pi�
 insert into sports_equipment values (35, ' ClimbingChains', 'Łańcuchy do wspinaczki', '8111111111', 'climbing-chains', 8);
 insert into sports_equipment values (36, ' ClimbingHelmet', 'Kask', '8111111121', 'climbing-helmet', 8);
 
+--app user account, password is bcrypted (10 cost factor) string "password"
+insert into MOSIR_USER values (101, 'Grochowska', '22 m.9', 'Warszawa', '1998-10-07', 'marcin98@gmail.com', 'Marcin', 'Marciniak',
+                               '91127341213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '503512951', 'marcin98', '11-402');
+insert into CLIENT values (1, 101);
+insert into MOSIR_USER values (102, 'Test', 'test', 'Test', '1998-10-07', 'test@gmail.com', 'Test', 'Test',
+                               '91127347213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '503502951', 'test', '10-402');
+insert into CLIENT values (2, 102);
 
+--app user tickets
+insert into CLIENT_TICKET values (1, '2022-11-21', false, '2022-12-21', 1, 1, 1);
+insert into CLIENT_TICKET values (2, '2022-11-22T11:52:13', false, '2022-12-22T11:52:13', 1, 1, 1);
+
+--app user membership cards
+insert into CLIENT_MEMBERSHIP_CARD values (1, 2, '2022-10-17', '2023-10-17', 1, 4, 2);
 
 
 

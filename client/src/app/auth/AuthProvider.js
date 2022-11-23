@@ -3,10 +3,10 @@ import {BASE_URL, ROLE_GUEST} from "../utils/constans";
 import {AuthContext} from "./AuthContext";
 
 export default function AuthProvider({children}) {
-    const [role, setRole] = React.useState(ROLE_GUEST);
-    const [token, setToken] = React.useState(null);
+    const [role, setRole] = React.useState(localStorage.getItem("role") || ROLE_GUEST);
+    const [token, setToken] = React.useState(localStorage.getItem("token"));
 
-    const login = (username, password, rememberMe) => fetch(BASE_URL + "/api/login", {
+    const login = (username, password, rememberMe) => fetch(BASE_URL + "/api/auth/login", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({username, password})
@@ -18,8 +18,10 @@ export default function AuthProvider({children}) {
         if(json.success) {
             setRole(json.role);
             setToken(json.token);
-            if(rememberMe)
+            if(rememberMe) {
+                localStorage.setItem("role", json.role);
                 localStorage.setItem("token", json.token);
+            }
         }
         return json.success;
     })
@@ -27,6 +29,7 @@ export default function AuthProvider({children}) {
     const logout = () => {
         setRole(ROLE_GUEST);
         setToken(null);
+        localStorage.removeItem("role");
         localStorage.removeItem("token");
     }
 

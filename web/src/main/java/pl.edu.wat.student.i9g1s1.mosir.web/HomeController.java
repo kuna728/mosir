@@ -2,6 +2,7 @@ package pl.edu.wat.student.i9g1s1.mosir.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.wat.student.i9g1s1.mosir.dto.guest.*;
@@ -45,4 +46,5 @@ public class HomeController {
     public List<SportsEquipmentDTO> getSportsEquipments() {
         return homeService.getSportsEquipments();
     }
+
 }

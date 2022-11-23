@@ -9,11 +9,14 @@ import ActivitiesView from "./app/views/guest/ActivitiesView";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import CoachesView from "./app/views/guest/CoachesView/CoachesView";
 import TicketsView from "./app/views/guest/TicketsView/TicketsView";
-import HallsView from "./app/views/guest/HallsView/HallsView";
+import HallsView from "./app/views/guest/HallsView";
 import EquipmentsView from "./app/views/guest/EquipmentsView";
 import LoginView from "./app/views/guest/LoginView";
-import BuyTicketView from "./app/views/user/BuyTicketView";
+import BuyTicketView from "./app/views/user/BuyTicketView/BuyTicketView";
+import DashboardView from "./app/views/user/DashboardView";
 import PrivateRoute from "./app/auth/PrivateRoute";
+import AuthProvider from "./app/auth/AuthProvider";
+import UserTicketsView from "./app/views/user/UserTicketsView";
 
 function App() {
 
@@ -23,32 +26,36 @@ function App() {
       <QueryClientProvider client={queryClient} >
         <BrowserRouter>
             <ScrollToTop />
-            <Routes>
-                <Route path="/" element={<BaseTemplate />}>
-                    {/*GUEST VIEWS*/}
-                    <Route path="/" exact element={<HomeView />} />
-                    <Route path="/regulamin" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/faq" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/dojazd" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/kontakt" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/sporty" exact element={<ActivitiesView />} />
-                    <Route path="/trenerzy" exact element={<CoachesView />} />
-                    <Route path="/bilety" exact element={<TicketsView />} />
-                    <Route path="/sale" exact element={<HallsView />} />} />
-                    <Route path="/sprzet-sportowy" exact element={<EquipmentsView />} />
-                    <Route path="/logowanie" exact element={<LoginView />} />
-                    <Route path="/rejestracja" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/odzyskaj-haslo" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                    <Route path="/logowanie" exact element={<LoginView />} />
+            <AuthProvider>
+                <Routes>
+                    <Route path="/" element={<BaseTemplate />}>
+                        {/*GUEST VIEWS*/}
+                        <Route path="/" exact element={<HomeView />} />
+                        <Route path="/regulamin" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/faq" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/dojazd" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/kontakt" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/sporty" exact element={<ActivitiesView />} />
+                        <Route path="/trenerzy" exact element={<CoachesView />} />
+                        <Route path="/bilety" exact element={<TicketsView />} />
+                        <Route path="/sale" exact element={<HallsView />} />} />
+                        <Route path="/sprzet-sportowy" exact element={<EquipmentsView />} />
+                        <Route path="/logowanie" exact element={<LoginView />} />
+                        <Route path="/rejestracja" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/odzyskaj-haslo" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/logowanie" exact element={<LoginView />} />
 
-                    {/*USER VIEWS*/}
-                    <Route element={<PrivateRoute accessLevel={ROLE_USER} /> } >
-                        <Route path="/kup-bilet" exact element={<BuyTicketView />} />
+                        {/*USER VIEWS*/}
+                        <Route element={<PrivateRoute accessLevel={ROLE_USER} /> } >
+                            <Route path="/moj-mosir" exact element={<DashboardView />} />
+                            <Route path="/kup-bilet" exact element={<BuyTicketView />} />
+                            <Route path="/moje-bilety" exact element={<UserTicketsView />} />
+                        </Route>
+
+                        <Route path="*" element={<ErrorView status={NOT_FOUND}/>}/>
                     </Route>
-
-                    <Route path="*" element={<ErrorView status={NOT_FOUND}/>}/>
-                </Route>
-            </Routes>
+                </Routes>
+            </AuthProvider>
         </BrowserRouter>
       </QueryClientProvider>
   );

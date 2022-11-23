@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
     Box,
     Button,
@@ -10,18 +10,32 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {Link} from "react-router-dom";
-import {useForm} from "react-hook-form";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {AuthContext} from "../../auth/AuthContext";
 
 export default function LoginView() {
 
-    const { handleSubmit, reset, control } = useForm();
+    const [username, setUsername] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [rememberMe, setRememberMe] = React.useState(false);
+    const [result, setResult] = React.useState(null);
 
-    const testHandler = () => fetch("http://localhost:8080/api/auth/login", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({username: "test", password: "test"})
-    }).then(res => res.json()).then(json => console.log(json));
+    const auth = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleLogin = () => {
+        setResult(null);
+        auth.login(username, password, rememberMe).then(isSuccess => {
+            if(isSuccess)
+                navigate(location.state && location.state.next ? location.state.next : "/moj-mosir");
+            else
+                setResult("Podano zły login lub hasło")
+        }).catch(e => {
+            setResult("Coś poszło nie tak. Spróbuj ponownie później.")
+        })
+    }
 
     return (
         <Box sx={{mt: {xs: 10, md: 10}, mb: 5}}>
@@ -33,15 +47,22 @@ export default function LoginView() {
                             <Typography variant="h3" component="h3" gutterBottom sx={{fontWeight: "300"}}>
                                 Logowanie
                             </Typography>
-                            <TextField type="text" label="Login lub e-mail" variant="outlined" />
-                            <TextField type="password" label="Hasło" variant="outlined" />
+                            { result && <Typography color="#d32f2f" variant="subtitle">{result}</Typography>}
+                            <TextField type="text" label="Login lub e-mail" variant="outlined"
+                                       value={username} onChange={e => setUsername(e.target.value)}
+                            />
+                            <TextField type="password" label="Hasło" variant="outlined"
+                                       value={password} onChange={e => setPassword(e.target.value)}
+                            />
                             <Box display={{md: "flex"}} justifyContent="space-between" alignItems="center">
-                                <FormControlLabel control={<Checkbox/>} label="Zapamiętaj mnie" />
+                                <FormControlLabel control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(!rememberMe)}/>}
+                                                  label="Zapamiętaj mnie"
+                                />
                                 <Typography display={{xs: "none", md: "inline"}} sx={{color: '#42a5f5'}}>
                                     <Link to="/odzyskaj-haslo">Nie pamiętasz hasła?</Link>
                                 </Typography>
                             </Box>
-                            <Button variant="contained" size="large" onClick={testHandler}>Zaloguj</Button>
+                            <Button variant="contained" size="large" onClick={handleLogin}>Zaloguj</Button>
                             <Typography display={{xs: "block", md: "none"}} sx={{color: '#42a5f5'}}>
                                 <Link to="/odzyskaj-haslo">Nie pamiętasz hasła?</Link>
                             </Typography>

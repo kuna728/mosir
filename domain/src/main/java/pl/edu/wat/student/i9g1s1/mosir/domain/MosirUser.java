@@ -4,12 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "mosir_user")
 @Data
-public class User {
+public class MosirUser {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -50,5 +49,11 @@ public class User {
 
     @Column(name = "city", length = 50, nullable = false)
     private String city;
+
+    @OneToOne(mappedBy = "user")
+    private Client client;
+
+    @OneToOne(mappedBy = "user")
+    private Coach coach;
 
 }

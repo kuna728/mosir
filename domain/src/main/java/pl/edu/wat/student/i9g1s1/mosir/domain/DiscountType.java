@@ -27,4 +27,10 @@ public class DiscountType {
 
     @ManyToMany(mappedBy = "discountTypes")
     private List<MembershipCard> membershipCards;
+
+    @OneToMany(mappedBy = "discountType")
+    private List<ClientsTicket> clientsTickets;
+
+    @OneToMany(mappedBy = "discountType")
+    private List<ClientsMembershipCard> clientsMembershipCards;
 }

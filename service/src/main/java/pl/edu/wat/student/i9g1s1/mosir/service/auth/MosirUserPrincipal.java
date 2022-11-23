@@ -2,24 +2,31 @@ package pl.edu.wat.student.i9g1s1.mosir.service.auth;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.edu.wat.student.i9g1s1.mosir.domain.User;
+import pl.edu.wat.student.i9g1s1.mosir.domain.MosirUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 @AllArgsConstructor
 public class MosirUserPrincipal implements UserDetails {
 
-    private User user;
+    private MosirUser user;
 
-    public User getUser() {
+    public MosirUser getUser() {
         return user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<GrantedAuthority>();
+        String role;
+        if(user.getCoach() != null)
+            role = user.getCoach().getIsManager() ? "MANAGER" : "COACH";
+        else
+            role = "USER";
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     @Override
@@ -29,7 +36,7 @@ public class MosirUserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUsername();
+        return user.getUsername();
     }
 
     @Override
