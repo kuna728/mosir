@@ -13,7 +13,6 @@ import HallsView from "./app/views/guest/HallsView";
 import EquipmentsView from "./app/views/guest/EquipmentsView";
 import LoginView from "./app/views/guest/LoginView";
 import BuyTicketView from "./app/views/user/BuyTicketView/BuyTicketView";
-import DashboardView from "./app/views/user/DashboardView";
 import PrivateRoute from "./app/auth/PrivateRoute";
 import AuthProvider from "./app/auth/AuthProvider";
 import UserTicketsView from "./app/views/user/UserTicketsView";
@@ -47,7 +46,9 @@ function App() {
 
                         {/*USER VIEWS*/}
                         <Route element={<PrivateRoute accessLevel={ROLE_USER} /> } >
-                            <Route path="/moj-mosir" exact element={<DashboardView />} />
+                            <Route path="/moje-konto" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                            <Route path="/moj-mosir" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                            <Route path="/zajecia" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
                             <Route path="/kup-bilet" exact element={<BuyTicketView />} />
                             <Route path="/moje-bilety" exact element={<UserTicketsView />} />
                         </Route>

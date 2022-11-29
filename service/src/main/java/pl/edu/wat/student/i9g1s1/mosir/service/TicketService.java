@@ -7,7 +7,10 @@ import pl.edu.wat.student.i9g1s1.mosir.ClientsTicketRepository;
 import pl.edu.wat.student.i9g1s1.mosir.MembershipCardRepository;
 import pl.edu.wat.student.i9g1s1.mosir.TicketRepository;
 import pl.edu.wat.student.i9g1s1.mosir.domain.*;
-import pl.edu.wat.student.i9g1s1.mosir.dto.user.*;
+import pl.edu.wat.student.i9g1s1.mosir.dto.user.BuyTicketDTO;
+import pl.edu.wat.student.i9g1s1.mosir.dto.user.MultiTicketDTO;
+import pl.edu.wat.student.i9g1s1.mosir.dto.user.SingleTicketDTO;
+import pl.edu.wat.student.i9g1s1.mosir.dto.user.TicketListDTO;
 import pl.edu.wat.student.i9g1s1.mosir.service.auth.AuthService;
 
 import java.time.LocalDateTime;

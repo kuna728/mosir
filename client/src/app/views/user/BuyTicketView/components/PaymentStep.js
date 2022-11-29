@@ -13,9 +13,9 @@ import {
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../../auth/AuthContext";
-import useBuyTicket from "../../../../query/hooks/useBuyTicket";
 import tokenFetcher from "../../../../query/fetchers/tokenFetcher";
 import {useQueryClient} from "@tanstack/react-query";
+import downloadFile from "../../../../utils/downloadFile";
 
 export default function PaymentStep({
         tickets, membershipCards, activities,
@@ -26,6 +26,8 @@ export default function PaymentStep({
     const [paymentMethod, setPaymentMethod] = React.useState('');
     const [waitingForPayment, setWaitingForPayment] = React.useState(0);
     const [paymentSuccess, setPaymentSuccess] = React.useState(null);
+    const [type, setType] = React.useState('');
+    const [id, setId] = React.useState(null);
 
     const theme = useTheme();
     const stackDirection = useMediaQuery(theme.breakpoints.down("md")) ? "column" : "row";
@@ -62,13 +64,22 @@ export default function PaymentStep({
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ticketType, ticketId, discountId: discount})
-            }).then(() => {
+            }).then(json => {
+                if(json.tickets) {
+                    setType('single');
+                    setId(json.tickets[0].id)
+                } else {
+                    setType('multi');
+                    setId(json.membershipCards[0].id);
+                }
                 setWaitingForPayment(2);
                 setPaymentSuccess(true);
+                setBlockStepper(true);
                 queryClient.invalidateQueries(['user_tickets']);
             }).catch(e => {
                 setWaitingForPayment(2);
                 setPaymentSuccess(false);
+                setBlockStepper(true);
             })
         }, 3000)
     }
@@ -135,8 +146,12 @@ export default function PaymentStep({
                     </Typography>
                     <Stack direction={stackDirection} spacing={1} sx={{mt: 2}}>
                     <Button variant="contained" onClick={() => navigate('/moje-bilety')}>Do listy biletów</Button>
-                    <Button variant="contained">Pobierz bilet</Button>
-                    <Button variant="contained">Pobierz fakture</Button>
+                    <Button variant="contained" onClick={() => downloadFile(type, id, 'ticket', auth.token)}>
+                        Pobierz bilet
+                    </Button>
+                    <Button variant="contained" onClick={() => downloadFile(type, id, 'invoice', auth.token)}>
+                        Pobierz fakture
+                    </Button>
                     <Button variant="contained" onClick={handleResetButtonClick}>Kup ponownie</Button>
                     </Stack>
                 </> : <>

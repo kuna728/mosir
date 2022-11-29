@@ -5,7 +5,6 @@ import {
     LinearProgress,
     Paper,
     Table, TableBody,
-    TableCell,
     TableContainer,
     TableHead,
     TableRow,
@@ -29,7 +28,7 @@ export default function EquipmentsView() {
                 Mosir to nie tylko trenerzy i sale do uprawiania sportów. Oferujemy również wynajem sprzętu sportowego na czas zajęć.
                 Sprzęt nie jest dodatkowo płatny, można go wybrać przy rezerwacji zajęć.
             </Typography>
-            <TableContainer sx={{mt: 3}}component={Paper}>
+            <TableContainer sx={{mt: 3}} component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>

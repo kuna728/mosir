@@ -12,7 +12,7 @@ export default function TicketDetails({ticket, isMembershipCard}) {
             <Typography variant="h3">{ticket.price},-</Typography>
             <Stack>
                 {ticket.discountTypes.filter(discountType => discountType.name !== "normalny").map(discountType => (
-                    <Typography variant="body1">
+                    <Typography variant="body1" key={discountType.id}>
                         {capitalizeFirstLetter(discountType.name)}&nbsp;
                         <b>{parseFloat(Number(discountType.value * ticket.price).toFixed(2))},-</b>&nbsp;
                         ({discountType.value * 100}%)

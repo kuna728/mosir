@@ -1,7 +1,6 @@
 import React from "react";
 import {Accordion, AccordionDetails, AccordionSummary, Grid, Typography} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {capitalizeFirstLetter} from "../../../../utils/stringUtils";
 import TicketDetails from "./TicketDetails";
 
 export default function TicketAccordion({ticket, membershipCards}) {
@@ -21,7 +20,7 @@ export default function TicketAccordion({ticket, membershipCards}) {
                         <TicketDetails ticket={ticket} />
                     </Grid>
                     {membershipCards.map(membershipCard => (
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} key={membershipCard.id}>
                             <TicketDetails ticket={membershipCard} isMembershipCard />
                         </Grid>
                     ))}

@@ -14,7 +14,6 @@ import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../auth/AuthContext";
 import {ROLE_GUEST} from "../../../utils/constans";
 import {AccountCircle} from "@mui/icons-material";
-import {Divider} from "@mui/material";
 
 const pages = [
     {label: 'Sporty', href: "/sporty"},
@@ -75,7 +74,7 @@ function TopBar() {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
+                        component="p"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -129,7 +128,7 @@ function TopBar() {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
+                        component="p"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -189,6 +188,9 @@ function TopBar() {
                                     open={Boolean(anchorElRight)}
                                     onClose={handleCloseRightMenu}
                                 >
+                                    <MenuItem sx={{borderBottom: "1px solid black"}} onClick={() => navigate('/moje-konto')}>
+                                        <Typography textAlign="center" fontWeight="bold">{auth.legalName}</Typography>
+                                    </MenuItem>
                                     {user_pages.map((page) => (
                                         <MenuItem key={page.label} onClick={() => handleMenuButtonClick(page.href)}>
                                             <Typography textAlign="center">{page.label}</Typography>

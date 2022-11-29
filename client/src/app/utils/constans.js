@@ -4,7 +4,7 @@ export const NOT_IMPLEMENTED = "not_implemented";
 export const SERVER_ERROR = "server_error";
 export const OTHER_ERROR = "other_error";
 
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "http://192.168.0.124:8080";
 
 export const ROLE_GUEST = "ROLE_GUEST";
 export const ROLE_USER = "ROLE_USER";

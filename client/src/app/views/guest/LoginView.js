@@ -29,7 +29,7 @@ export default function LoginView() {
         setResult(null);
         auth.login(username, password, rememberMe).then(isSuccess => {
             if(isSuccess)
-                navigate(location.state && location.state.next ? location.state.next : "/moj-mosir");
+                navigate(location.state && location.state.next ? location.state.next : "/moje-bilety");
             else
                 setResult("Podano zły login lub hasło")
         }).catch(e => {

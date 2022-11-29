@@ -10,9 +10,11 @@ import java.math.BigDecimal;
 @Setter
 public class DiscountTypeDTO {
 
-    private final Long id;
-    private final String name;
-    private final BigDecimal value;
+    private Long id;
+    private String name;
+    private BigDecimal value;
+
+    public DiscountTypeDTO() { }
 
     public DiscountTypeDTO(DiscountType discountType) {
         this.id = discountType.getId();

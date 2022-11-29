@@ -27,7 +27,7 @@ export default function ActivitiesView() {
                 </Typography>
                 <Grid container sx={{mt: 1, mb: 5}} spacing={4}>
                     {activities.data.map((activity) => (
-                        <Grid item xs={12} md={6} xl={3}>
+                        <Grid item xs={12} md={6} xl={3} key={activity.name}>
                             <Card sx={{minHeight: 300}}>
                                 <CardMedia
                                     component="img"

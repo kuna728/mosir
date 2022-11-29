@@ -1,10 +1,9 @@
 import React from "react";
 import useTickets from "../../../query/hooks/useTickets";
 import useMembershipCards from "../../../query/hooks/useMembershipCards";
-import {Box, Button, LinearProgress, Stack, Typography} from "@mui/material";
+import {Box, Button, LinearProgress, Typography} from "@mui/material";
 import ErrorView from "../ErrorView";
 import {SERVER_ERROR} from "../../../utils/constans";
-import useActivities from "../../../query/hooks/useActivities";
 import {isError, isLoading} from "../../../utils/queryUtils";
 import TicketAccordion from "./components/TicketAccordion";
 import {useNavigate} from "react-router-dom";
@@ -32,7 +31,7 @@ export default function TicketsView() {
                     Kup bilet
                 </Button>
                 {getActivityTypes().map(activityType => (
-                    <TicketAccordion ticket={tickets.data.filter(ticket => ticket.activityType === activityType)[0]}
+                    <TicketAccordion key={activityType.name} ticket={tickets.data.filter(ticket => ticket.activityType === activityType)[0]}
                                      membershipCards={membershipCards.data.filter(membershipCard => membershipCard.activityType === activityType)}
                     />
                 ))}

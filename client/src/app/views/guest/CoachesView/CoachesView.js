@@ -20,7 +20,7 @@ export default function CoachesView() {
                     Zapoznaj się z naszą wykwalifikowaną kadrom trenerską.
                 </Typography>
                 <Stack spacing={4} sx={{mt: 5, mb: 5}}>
-                    {coaches.data.map(coach => <Coach {...coach} />)}
+                    {coaches.data.map(coach => <Coach {...coach} key={coach.phoneNumber} />)}
                 </Stack>
             </Box>
         </Box>

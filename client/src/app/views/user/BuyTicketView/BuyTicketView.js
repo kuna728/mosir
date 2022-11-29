@@ -50,7 +50,7 @@ export default function BuyTicketView() {
 
     return isLoading(userDetails, tickets, membershipCards, activities) ? <LinearProgress /> :
         isError(userDetails, tickets, membershipCards, activities) ? <ErrorView status={SERVER_ERROR} /> : (
-            <Box sx={{mt: {xs: 2, md: 7}, mb: 2}}>
+            <Box sx={{mt: {xs: 2, md: 7}, mb: 5}}>
                 <Typography variant="h2" component="h1" gutterBottom>
                     Kup bilet
                 </Typography>

@@ -29,7 +29,7 @@ export default function HallsView() {
             </Typography>
             <Grid container sx={{mt: 1, mb: 5}} spacing={4} alignItems="stretch">
                 {halls.data.map(hall => (
-                    <Grid item xs={12} md={6} lg={4}>
+                    <Grid item xs={12} md={6} lg={4} key={hall.number}>
                         <Card>
                             <CardHeader title={hall.name} subheader={`Sala numer ${hall.number}`} />
                             <CardMedia
