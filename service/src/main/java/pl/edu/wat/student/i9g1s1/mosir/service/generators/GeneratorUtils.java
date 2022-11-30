@@ -2,6 +2,8 @@ package pl.edu.wat.student.i9g1s1.mosir.service.generators;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.BaseFont;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Base64;
 
 @Component
 public class GeneratorUtils {
@@ -63,5 +66,11 @@ public class GeneratorUtils {
 
     public String getDiscountTypeName(DiscountType discountType) {
         return discountType.getName() + " (" + getFormattedStringFromBigDecimal(discountType.getValue().multiply(BigDecimal.valueOf(100))) + "%)";
+    }
+
+    public String getEncodedBanner() throws IOException {
+        return Base64.getEncoder().encodeToString(
+                IOUtils.toByteArray(new ClassPathResource("static/images/common/banner.jpg").getInputStream())
+        );
     }
 }

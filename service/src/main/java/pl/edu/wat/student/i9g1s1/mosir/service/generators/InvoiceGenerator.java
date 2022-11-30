@@ -25,6 +25,7 @@ public class InvoiceGenerator {
         context.setVariable("ticketName", generateTicketName(clientsTicket));
         context.setVariable("totalAmount", generatorUtils.getTotalAmount(clientsTicket));
         context.setVariable("user", user);
+        context.setVariable("banner", generatorUtils.getEncodedBanner());
         return generatorUtils.generatePDFFromTemplate("ticket_invoice_template", context);
     }
 
@@ -37,6 +38,7 @@ public class InvoiceGenerator {
         context.setVariable("ticketName", generateTicketName(clientsMembershipCard));
         context.setVariable("totalAmount", generatorUtils.getTotalAmount(clientsMembershipCard));
         context.setVariable("user", user);
+        context.setVariable("banner", generatorUtils.getEncodedBanner());
         return generatorUtils.generatePDFFromTemplate("ticket_invoice_template", context);
     }
 

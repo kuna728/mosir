@@ -3,6 +3,8 @@ package pl.edu.wat.student.i9g1s1.mosir.service.generators;
 import com.google.zxing.WriterException;
 import com.lowagie.text.DocumentException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
 import pl.edu.wat.student.i9g1s1.mosir.domain.ClientsMembershipCard;
@@ -23,6 +25,7 @@ public class TicketDocumentGenerator {
     public byte[] generateTicketDocumentPDF(MosirUser user, ClientsTicket clientsTicket) throws DocumentException, IOException, WriterException {
         Context context = new Context();
         context.setVariable("qrcode", Base64.getEncoder().encodeToString(qrCodeGenerator.generateTicketQRCode(user, clientsTicket)));
+        context.setVariable("banner", generatorUtils.getEncodedBanner());
         context.setVariable("ticketName", "Bilet jednorazowy");
         context.setVariable("ticketId", String.format("%06d", clientsTicket.getId()));
         context.setVariable("totalAmount", generatorUtils.getTotalAmount(clientsTicket));
@@ -39,6 +42,7 @@ public class TicketDocumentGenerator {
     public byte[] generateTicketDocumentPDF(MosirUser user, ClientsMembershipCard clientsMembershipCard) throws DocumentException, IOException, WriterException {
         Context context = new Context();
         context.setVariable("qrcode", Base64.getEncoder().encodeToString(qrCodeGenerator.generateTicketQRCode(user, clientsMembershipCard)));
+        context.setVariable("banner", generatorUtils.getEncodedBanner());
         context.setVariable("ticketName", "Karnet " + clientsMembershipCard.getMembershipCard().getTotalUsages() + " wejść");
         context.setVariable("ticketId", String.format("%06d", clientsMembershipCard.getId()));
         context.setVariable("totalAmount", generatorUtils.getTotalAmount(clientsMembershipCard));

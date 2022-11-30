@@ -158,7 +158,6 @@ insert into membership_card_discount_types values (12, 4);
 
 --halls
 insert into hall values (1, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
-                         'Basen rekreacyjny', '101B', 'basen-rekreacyjny',
                           'Basen sportowy', '101A', 'basen-sportowy', 1);
 insert into hall values (2, 'Integer id ligula quam. Sed et eros a tortor maximus aliquet eu ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent laoreet nibh vitae turpis blandit condimentum. Phasellus sit amet erat non velit elementum posuere.',
                           'Basen rekreacyjny', '101B', 'basen-rekreacyjny', 1);
