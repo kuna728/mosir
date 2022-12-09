@@ -16,12 +16,16 @@ import BuyTicketView from "./app/views/user/BuyTicketView/BuyTicketView";
 import PrivateRoute from "./app/auth/PrivateRoute";
 import AuthProvider from "./app/auth/AuthProvider";
 import UserTicketsView from "./app/views/user/UserTicketsView";
+import NewAccountView from "./app/views/guest/NewAccountView";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 function App() {
 
   const queryClient = new QueryClient();
 
   return (
+      <LocalizationProvider dateAdapter={AdapterMoment}>
       <QueryClientProvider client={queryClient} >
         <BrowserRouter>
             <ScrollToTop />
@@ -37,11 +41,11 @@ function App() {
                         <Route path="/sporty" exact element={<ActivitiesView />} />
                         <Route path="/trenerzy" exact element={<CoachesView />} />
                         <Route path="/bilety" exact element={<TicketsView />} />
-                        <Route path="/sale" exact element={<HallsView />} />} />
+                        <Route path="/sale" exact element={<HallsView />} />
                         <Route path="/sprzet-sportowy" exact element={<EquipmentsView />} />
                         <Route path="/logowanie" exact element={<LoginView />} />
-                        <Route path="/rejestracja" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                        <Route path="/odzyskaj-haslo" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
+                        <Route path="/rejestracja" exact element={<NewAccountView />} />
+                        <Route path="/resetuj-haslo" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
                         <Route path="/logowanie" exact element={<LoginView />} />
 
                         {/*USER VIEWS*/}
@@ -59,6 +63,7 @@ function App() {
             </AuthProvider>
         </BrowserRouter>
       </QueryClientProvider>
+      </LocalizationProvider>
   );
 }
 

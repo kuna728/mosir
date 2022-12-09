@@ -14,6 +14,9 @@ public class MosirUser {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
+    @Column(name="is_active", nullable = false)
+    private Boolean isActive;
+
     @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
 
@@ -25,6 +28,9 @@ public class MosirUser {
 
     @Column(name = "last_name", length = 70, nullable = false)
     private String lastName;
+
+    @Column(name = "gender", length = 1, nullable = false)
+    private String gender;
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;

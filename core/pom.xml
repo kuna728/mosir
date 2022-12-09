@@ -37,94 +37,130 @@
       <plugin> 
         <groupId>org.springframework.boot</groupId>  
         <artifactId>spring-boot-maven-plugin</artifactId>  
-        <configuration> 
+        <configuration>
+          <profiles>
+            <profile>dev</profile>
+            <profile>prod</profile>
+          </profiles>
           <skip>false</skip> 
         </configuration> 
-      </plugin>  
-      <plugin> 
-        <groupId>com.github.eirslett</groupId>  
-        <artifactId>frontend-maven-plugin</artifactId>  
-        <version>1.12.1</version>  
-        <configuration> 
-          <workingDirectory>../client</workingDirectory>  
-          <nodeVersion>v16.17.0</nodeVersion> 
-        </configuration>  
-        <executions> 
-          <execution> 
-            <id>install node and npm</id>  
-            <goals> 
-              <goal>install-node-and-npm</goal> 
-            </goals> 
-          </execution>  
-          <execution> 
-            <id>npm install</id>  
-            <goals> 
-              <goal>npm</goal> 
-            </goals>  
-            <phase>generate-resources</phase> 
-          </execution>  
-          <execution> 
-            <id>npm run build</id>  
-            <goals> 
-              <goal>npm</goal> 
-            </goals>  
-            <phase>generate-resources</phase>  
-            <configuration> 
-              <arguments>run build</arguments> 
-            </configuration> 
-          </execution> 
-        </executions> 
-      </plugin>  
-      <plugin> 
-        <groupId>org.apache.maven.plugins</groupId>  
-        <artifactId>maven-resources-plugin</artifactId>  
-        <version>3.1.0</version>  
-        <executions> 
-          <execution> 
-            <id>copy-resources</id>  
-            <phase>process-classes</phase>  
-            <goals> 
-              <goal>copy-resources</goal> 
-            </goals>  
-            <configuration> 
-              <outputDirectory>target/classes/static</outputDirectory>  
-              <resources> 
-                <resource> 
-                  <directory>../client/build</directory> 
-                </resource> 
-              </resources> 
-            </configuration> 
-          </execution> 
-        </executions> 
-      </plugin>  
-      <plugin>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>2.5.0</version>
-        <configuration>
-          <schemaVersion>v2</schemaVersion>
-          <subscriptionId>076cac5e-2cec-444d-8f80-efc62ee82079</subscriptionId>
-          <resourceGroup>mosir</resourceGroup>
-          <appName>mosir</appName>
-          <pricingTier>F1</pricingTier>
-          <region>West Europe</region>
-          <runtime>
-            <os>Linux</os>
-            <javaVersion>Java 11</javaVersion>
-            <webContainer>Tomcat 9.0</webContainer>
-          </runtime>
-          <deployment>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/target</directory>
-                <includes>
-                  <include>*.war</include>
-                </includes>
-              </resource>
-            </resources>
-          </deployment>
-        </configuration>
       </plugin>
     </plugins> 
-  </build> 
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <activatedProperties>dev</activatedProperties>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>profile</name>
+          <value>dev</value>
+        </property>
+      </activation>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <activatedProperties>prod</activatedProperties>
+      </properties>
+      <activation>
+        <property>
+          <name>profile</name>
+          <value>prod</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.12.1</version>
+            <configuration>
+              <workingDirectory>../client</workingDirectory>
+              <nodeVersion>v16.17.0</nodeVersion>
+            </configuration>
+            <executions>
+              <execution>
+                <id>install node and npm</id>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>npm install</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>generate-resources</phase>
+              </execution>
+              <execution>
+                <id>npm run build</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <arguments>run build</arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>process-classes</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>target/classes/static</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>../client/build</directory>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-webapp-maven-plugin</artifactId>
+            <version>2.5.0</version>
+            <configuration>
+              <schemaVersion>v2</schemaVersion>
+              <subscriptionId>076cac5e-2cec-444d-8f80-efc62ee82079</subscriptionId>
+              <resourceGroup>mosir</resourceGroup>
+              <appName>mosir</appName>
+              <pricingTier>F1</pricingTier>
+              <region>West Europe</region>
+              <runtime>
+                <os>Linux</os>
+                <javaVersion>Java 11</javaVersion>
+                <webContainer>Tomcat 9.0</webContainer>
+              </runtime>
+              <deployment>
+                <resources>
+                  <resource>
+                    <directory>${project.basedir}/target</directory>
+                    <includes>
+                      <include>*.war</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </deployment>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

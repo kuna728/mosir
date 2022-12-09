@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import {
     Box,
-    Button,
     Checkbox,
     FormControlLabel,
     Grid,
@@ -12,27 +11,40 @@ import {
 } from "@mui/material";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../auth/AuthContext";
+import LoadingButton from '@mui/lab/LoadingButton';
+import {Controller, useForm} from "react-hook-form";
 
 export default function LoginView() {
 
-    const [username, setUsername] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [rememberMe, setRememberMe] = React.useState(false);
     const [result, setResult] = React.useState(null);
+    const [isLoading, setLoading] = React.useState(false);
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            username: "",
+            password: "",
+            rememberMe: false
+        }
+    })
 
     const auth = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleLogin = () => {
+    const handleLogin = (data) => {
+        console.log(data)
+        const {username, password, rememberMe} = data
+        setLoading(true);
         setResult(null);
         auth.login(username, password, rememberMe).then(isSuccess => {
+            setLoading(false);
             if(isSuccess)
                 navigate(location.state && location.state.next ? location.state.next : "/moje-bilety");
             else
                 setResult("Podano zły login lub hasło")
         }).catch(e => {
+            setLoading(false);
             setResult("Coś poszło nie tak. Spróbuj ponownie później.")
         })
     }
@@ -48,23 +60,61 @@ export default function LoginView() {
                                 Logowanie
                             </Typography>
                             { result && <Typography color="#d32f2f" variant="subtitle">{result}</Typography>}
-                            <TextField type="text" label="Login lub e-mail" variant="outlined"
-                                       value={username} onChange={e => setUsername(e.target.value)}
+                            <Controller name="username" control={control}
+                                        rules={{
+                                            required: "Pole jest wymagane",
+                                            minLength: {
+                                                value: 4,
+                                                message: "Login (email) powinien mieć minimum 4 znaki"
+                                            },
+                                            maxLength: {
+                                                value: 100,
+                                                message: "Login (email) nie może mieć więcej niż 100 znaków"
+                                            }
+                                        }}
+                                        render={({field}) => (
+                                            <TextField type="text" label="Login lub e-mail" variant="outlined"
+                                                       error={errors.username} helperText={errors.username?.message}
+                                                       {...field}
+                                            />
+                                        )}
                             />
-                            <TextField type="password" label="Hasło" variant="outlined"
-                                       value={password} onChange={e => setPassword(e.target.value)}
+                            <Controller name="password" control={control}
+                                        rules={{
+                                            required: "Pole jest wymagane",
+                                            minLength: {
+                                                value: 6,
+                                                message: "Hasło powinno mieć minimum 6 znaków"
+                                            },
+                                            maxLength: {
+                                                value: 60,
+                                                message: "Hasło nie może mieć więcej niż 60 znaków"
+                                            }
+                                        }}
+                                        render={({field}) => (
+                                            <TextField type="password" label="Hasło" variant="outlined"
+                                                       error={errors.password} helperText={errors.password?.message}
+                                                       {...field}
+                                            />
+                                        )}
                             />
                             <Box display={{md: "flex"}} justifyContent="space-between" alignItems="center">
-                                <FormControlLabel control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(!rememberMe)}/>}
-                                                  label="Zapamiętaj mnie"
+                                <Controller name="rememberMe" control={control}
+                                            render={({field}) => (
+                                                <FormControlLabel control={<Checkbox {...field}/>}
+                                                                  label="Zapamiętaj mnie"
+                                                />
+                                            )}
                                 />
                                 <Typography display={{xs: "none", md: "inline"}} sx={{color: '#42a5f5'}}>
-                                    <Link to="/odzyskaj-haslo">Nie pamiętasz hasła?</Link>
+                                    <Link to="/resetuj-haslo">Nie pamiętasz hasła?</Link>
                                 </Typography>
                             </Box>
-                            <Button variant="contained" size="large" onClick={handleLogin}>Zaloguj</Button>
+                            <LoadingButton loading={isLoading} variant="contained" size="large" onClick={handleSubmit(handleLogin)}>
+                                Zaloguj
+                            </LoadingButton>
                             <Typography display={{xs: "block", md: "none"}} sx={{color: '#42a5f5'}}>
-                                <Link to="/odzyskaj-haslo">Nie pamiętasz hasła?</Link>
+                                <Link to="/resetuj-haslo">Nie pamiętasz hasła?</Link>
                             </Typography>
                             <Typography sx={{color: '#42a5f5'}}><Link to="/rejestracja">Nie masz konta?</Link></Typography>
                         </Stack>

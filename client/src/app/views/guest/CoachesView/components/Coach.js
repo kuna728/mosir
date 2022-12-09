@@ -1,4 +1,4 @@
-import {Avatar, Grid, Paper, Stack, Typography} from "@mui/material";
+import {Grid, Paper, Typography} from "@mui/material";
 import {BASE_URL} from "../../../../utils/constans";
 import {parseStringArray} from "../../../../utils/stringUtils";
 
@@ -8,7 +8,7 @@ export default function Coach({firstName, lastName, dateOfBirth, email, phoneNum
         <Paper sx={{padding: 2}}>
             <Grid container spacing={5} justifyContent="center">
                 <Grid item xs="auto">
-                    <img src={BASE_URL + imageUrl} style={{borderRadius: 150}}/>
+                    <img alt={`${firstName} ${lastName}`} src={BASE_URL + imageUrl} style={{borderRadius: 150}}/>
                 </Grid>
                 <Grid item xs={12} md={9}>
                     <Grid container spacing={5}>
