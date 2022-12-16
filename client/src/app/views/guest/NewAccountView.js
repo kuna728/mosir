@@ -16,7 +16,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import MenuItem from "@mui/material/MenuItem";
 import {DatePicker} from "@mui/x-date-pickers";
 import moment from "moment";
-import peselValidator from "../../utils/peselValidator";
+import peselValidator from 'pesel-validator';
 import {Link} from "react-router-dom";
 import {BASE_URL} from "../../utils/constans";
 
@@ -25,6 +25,8 @@ export default function NewAccountView() {
 
     const { control, handleSubmit, watch, formState: { errors } } = useForm();
     const [dateOfBirth, setDateOfBirth] = React.useState(null);
+
+    console.log(watch("dateOfBirth") instanceof moment && watch("dateOfBirth").isValid());
 
     const onSubmit = data => {
         console.log(data);
