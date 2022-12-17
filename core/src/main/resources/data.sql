@@ -17,7 +17,7 @@ insert into ACTIVITY_TYPE values (8, 'Marzyłeś o wspinaczce w świetnie wyposa
                                      'Wspinaczka', 'wspinaczka');
 
 -- accounts and profiles for coaches, password is bcrypted (10 cost factor) string "password" in each case
-insert into MOSIR_USER values (1, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'andrzej.andrzejowicz@mosir.pl', 'Andrzej', 'Andrzejowicz',
+insert into MOSIR_USER values (1, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'andrzej.andrzejowicz@mosir.pl', 'Andrzej', 'm', TRUE, 'Andrzejowicz',
                                '92112341213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '523512351', 'a.andrzejowicz', '12-412');
 insert into COACH values (1, true, 'andrzej-andrzejowicz', 1);
 insert into ACTIVITY_TYPE_COACHES values (1, 1);
@@ -25,59 +25,59 @@ insert into ACTIVITY_TYPE_COACHES values (3, 1);
 insert into ACTIVITY_TYPE_COACHES values (4, 1);
 insert into ACTIVITY_TYPE_COACHES values (5, 1);
 insert into ACTIVITY_TYPE_COACHES values (7, 1);
-insert into MOSIR_USER values (2, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'jacek.kowalski@mosir.pl', 'Jacek', 'Kowalski',
+insert into MOSIR_USER values (2, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'jacek.kowalski@mosir.pl', 'Jacek', 'm', TRUE, 'Kowalski',
                                '87123502581', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '759123860', 'j.kowalski', '12-412');
 insert into COACH values (2, false, 'jacek-kowalski', 2);
 insert into ACTIVITY_TYPE_COACHES values (1, 2);
 insert into ACTIVITY_TYPE_COACHES values (5, 2);
 insert into ACTIVITY_TYPE_COACHES values (8, 2);
-insert into MOSIR_USER values (3, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'rafal.sekulski@mosir.pl', 'Rafal', 'Sekulski',
+insert into MOSIR_USER values (3, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'rafal.sekulski@mosir.pl', 'Rafal', 'm', TRUE, 'Sekulski',
                                '87123502582', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '724157436', 'r.sekulski', '12-412');
 insert into COACH values (3, false, 'rafal-sekulski', 3);
 insert into ACTIVITY_TYPE_COACHES values (2, 3);
 insert into ACTIVITY_TYPE_COACHES values (3, 3);
 insert into ACTIVITY_TYPE_COACHES values (4, 3);
 insert into ACTIVITY_TYPE_COACHES values (6, 3);
-insert into MOSIR_USER values (4, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'jan.janowski@mosir.pl', 'Jan', 'Janowski',
+insert into MOSIR_USER values (4, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'jan.janowski@mosir.pl', 'Jan', 'm', TRUE, 'Janowski',
                                '87123502583', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '632612356', 'j.janowski', '12-412');
 insert into COACH values (4, false, 'jan-janowski', 4);
 insert into ACTIVITY_TYPE_COACHES values (1, 4);
 insert into ACTIVITY_TYPE_COACHES values (6, 4);
 insert into ACTIVITY_TYPE_COACHES values (8, 4);
-insert into MOSIR_USER values (5, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'zbigniew.nowak@mosir.pl', 'Zbigniew', 'Nowak',
+insert into MOSIR_USER values (5, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'zbigniew.nowak@mosir.pl', 'Zbigniew', 'm', TRUE, 'Nowak',
                                '87123502584', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '642731396', 'z.nowak', '12-412');
 insert into COACH values (5, false, 'zbigniew-nowak', 5);
 insert into ACTIVITY_TYPE_COACHES values (2, 5);
 insert into ACTIVITY_TYPE_COACHES values (3, 5);
 insert into ACTIVITY_TYPE_COACHES values (4, 5);
 insert into ACTIVITY_TYPE_COACHES values (5, 5);
-insert into MOSIR_USER values (6, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'joanna.podolska@mosir.pl', 'Joanna', 'Podolska',
+insert into MOSIR_USER values (6, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'joanna.podolska@mosir.pl', 'Joanna', 'f', TRUE, 'Podolska',
                                '87123502585', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '804928691', 'j.podolska', '12-412');
 insert into COACH values (6, false, 'joanna-podolska', 6);
 insert into ACTIVITY_TYPE_COACHES values (2, 6);
 insert into ACTIVITY_TYPE_COACHES values (4, 6);
 insert into ACTIVITY_TYPE_COACHES values (7, 6);
-insert into MOSIR_USER values (7, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'maciej.maciejowski@mosir.pl', 'Maciej', 'Maciejowski',
+insert into MOSIR_USER values (7, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'maciej.maciejowski@mosir.pl', 'Maciej', 'm', TRUE, 'Maciejowski',
                                '87123502586', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '523512352', 'm.maciejowski', '12-412');
 insert into COACH values (7, false, 'maciej-maciejowski', 7);
 insert into ACTIVITY_TYPE_COACHES values (1, 7);
 insert into ACTIVITY_TYPE_COACHES values (3, 7);
 insert into ACTIVITY_TYPE_COACHES values (4, 7);
 insert into ACTIVITY_TYPE_COACHES values (5, 7);
-insert into MOSIR_USER values (8, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'wojciech.wojciechowski@mosir.pl', 'Wojciech', 'Wojciechowski',
+insert into MOSIR_USER values (8, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'wojciech.wojciechowski@mosir.pl', 'Wojciech', 'm', TRUE, 'Wojciechowski',
                                '87123502587', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '523512353', 'w.wojciechowski', '12-412');
 insert into COACH values (8, false, 'wojciech-wojciechowski', 8);
 insert into ACTIVITY_TYPE_COACHES values (3, 8);
 insert into ACTIVITY_TYPE_COACHES values (6, 8);
 insert into ACTIVITY_TYPE_COACHES values (7, 8);
 insert into ACTIVITY_TYPE_COACHES values (8, 8);
-insert into MOSIR_USER values (9, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'katarzyna.kurka@mosir.pl', 'Katarzyna', 'Kurka',
+insert into MOSIR_USER values (9, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'katarzyna.kurka@mosir.pl', 'Katarzyna', 'f', TRUE, 'Kurka',
                                '87123502588', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '523512354', 'k.kurka', '12-412');
 insert into COACH values (9, false, 'katarzyna-kurka', 9);
 insert into ACTIVITY_TYPE_COACHES values (1, 9);
 insert into ACTIVITY_TYPE_COACHES values (4, 9);
 insert into ACTIVITY_TYPE_COACHES values (6, 9);
-insert into MOSIR_USER values (10, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'pawel.pawlowski@mosir.pl', 'Paweł', 'Pawłowski',
+insert into MOSIR_USER values (10, 'Marszałkowska', '21 m.10', 'Warszawa', '1987-12-14', 'pawel.pawlowski@mosir.pl', 'Paweł', 'm', TRUE, 'Pawłowski',
                                '87123502589', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '523512355', 'p.pawlowski', '12-412');
 insert into COACH values (10, false, 'pawel-pawlowski', 10);
 insert into ACTIVITY_TYPE_COACHES values (2, 10);
@@ -222,10 +222,10 @@ insert into sports_equipment values (35, ' ClimbingChains', 'Łańcuchy do wspin
 insert into sports_equipment values (36, ' ClimbingHelmet', 'Kask', '8111111121', 'climbing-helmet', 8);
 
 --app user account, password is bcrypted (10 cost factor) string "password"
-insert into MOSIR_USER values (101, 'Grochowska', '22 m.9', 'Warszawa', '1998-10-07', 'marcin98@gmail.com', 'Marcin', 'Marciniak',
+insert into MOSIR_USER values (101, 'Grochowska', '22 m.9', 'Warszawa', '1998-10-07', 'marcin98@gmail.com', 'Marcin', 'm', TRUE, 'Marciniak',
                                '91127341213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '503512951', 'marcin98', '11-402');
 insert into CLIENT values (1, 101);
-insert into MOSIR_USER values (102, 'Test', 'test', 'Test', '1998-10-07', 'test@gmail.com', 'Test', 'Test',
+insert into MOSIR_USER values (102, 'Test', 'test', 'Test', '1998-10-07', 'test@gmail.com', 'Test', 'o', TRUE, 'Test',
                                '91127347213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '503502951', 'test', '10-402');
 insert into CLIENT values (2, 102);
 
