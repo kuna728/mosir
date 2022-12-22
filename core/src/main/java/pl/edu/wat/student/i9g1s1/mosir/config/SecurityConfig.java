@@ -1,4 +1,4 @@
-package pl.edu.wat.student.i9g1s1.mosir.security;
+package pl.edu.wat.student.i9g1s1.mosir.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

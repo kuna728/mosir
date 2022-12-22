@@ -9,9 +9,11 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class AuthResponseDTO {
 
-    public static AuthResponseDTO UNSUCCESSFUL_RESPONSE = new AuthResponseDTO(false, null, null, null, null);
+    public final static AuthResponseDTO UNSUCCESSFUL_RESPONSE = new AuthResponseDTO(false, null, null, null, null, null);
+    public final static AuthResponseDTO INACTIVE_RESPONSE = new AuthResponseDTO(true, false, null, null, null, null);
 
     private final boolean success;
+    private final Boolean isActive;
     private final String token;
     private final String role;
     private final String firstName;

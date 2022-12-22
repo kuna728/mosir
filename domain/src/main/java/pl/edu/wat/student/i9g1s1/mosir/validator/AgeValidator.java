@@ -20,6 +20,9 @@ public class AgeValidator implements ConstraintValidator<AgeConstraint, String> 
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        if(s == null)
+            return true;
+
         LocalDate date;
         try {
              date = LocalDate.parse(s);

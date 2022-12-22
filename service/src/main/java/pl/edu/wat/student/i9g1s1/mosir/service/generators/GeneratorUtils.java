@@ -25,6 +25,16 @@ import java.util.Base64;
 public class GeneratorUtils {
 
     public byte[] generatePDFFromTemplate(String templateName, Context context) throws DocumentException, IOException {
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(generateHtmlFromTemplate(templateName, context));
+        renderer.getFontResolver().addFont("Roboto-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        ByteArrayOutputStream bytesOutput = new ByteArrayOutputStream();
+        renderer.layout();
+        renderer.createPDF(bytesOutput);
+        return bytesOutput.toByteArray();
+    }
+
+    public String generateHtmlFromTemplate(String templateName, Context context) throws IOException {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -32,15 +42,7 @@ public class GeneratorUtils {
 
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
-        String htmlString = templateEngine.process(templateName, context);
-
-        ITextRenderer renderer = new ITextRenderer();
-        renderer.setDocumentFromString(htmlString);
-        renderer.getFontResolver().addFont("Roboto-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-        ByteArrayOutputStream bytesOutput = new ByteArrayOutputStream();
-        renderer.layout();
-        renderer.createPDF(bytesOutput);
-        return bytesOutput.toByteArray();
+        return templateEngine.process(templateName, context);
     }
 
     public String getTotalAmount(ClientsTicket clientsTicket) {

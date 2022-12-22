@@ -72,6 +72,11 @@
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>2.6.7</version>
         </dependency>
+        <dependency>
+            <groupId>pl.unak7.pesel-validator</groupId>
+            <artifactId>pesel-validator</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

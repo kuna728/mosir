@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "mosir_user")
@@ -61,5 +62,12 @@ public class MosirUser {
 
     @OneToOne(mappedBy = "user")
     private Coach coach;
+
+    @OneToMany(mappedBy = "user")
+    private List<AccountOperationToken> operationTokens;
+
+    public String getLegalName() {
+        return firstName + " " + lastName;
+    }
 
 }

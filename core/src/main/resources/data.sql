@@ -1,3 +1,20 @@
+delete from activity_type_coaches;
+delete from hall;
+delete from membership_card_discount_types;
+delete from client_membership_card;
+delete from membership_card;
+delete from sports_equipment;
+delete from ticket_discount_types;
+delete from client_ticket;
+delete from ticket;
+delete from activity_type;
+delete from client;
+delete from coach;
+delete from account_operation_token;
+delete from mosir_user;
+delete from discount_type;
+
+
 -- activity types
 insert into ACTIVITY_TYPE values (1, 'Marzyłeś o pływaniu w świetnie wyposażonym obiekcie i wspaniałej atmosferze? Zapraszamy do mosiru!',
                                      'Pływanie', 'plywanie');
@@ -222,12 +239,12 @@ insert into sports_equipment values (35, ' ClimbingChains', 'Łańcuchy do wspin
 insert into sports_equipment values (36, ' ClimbingHelmet', 'Kask', '8111111121', 'climbing-helmet', 8);
 
 --app user account, password is bcrypted (10 cost factor) string "password"
-insert into MOSIR_USER values (101, 'Grochowska', '22 m.9', 'Warszawa', '1998-10-07', 'marcin98@gmail.com', 'Marcin', 'm', TRUE, 'Marciniak',
+insert into MOSIR_USER values (11, 'Grochowska', '22 m.9', 'Warszawa', '1998-10-07', 'marcin98@gmail.com', 'Marcin', 'm', TRUE, 'Marciniak',
                                '91127341213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '503512951', 'marcin98', '11-402');
-insert into CLIENT values (1, 101);
-insert into MOSIR_USER values (102, 'Test', 'test', 'Test', '1998-10-07', 'test@gmail.com', 'Test', 'o', TRUE, 'Test',
+insert into CLIENT values (1, 11);
+insert into MOSIR_USER values (12, 'Test', 'test', 'Test', '1998-10-07', 'test@gmail.com', 'Test', 'o', TRUE, 'Test',
                                '91127347213', '$2y$10$qxyAzlGlejzAaWKDT547qunIoNfp/KOk1obBaDyQYlWx2XeeRpShK', '503502951', 'test', '10-402');
-insert into CLIENT values (2, 102);
+insert into CLIENT values (2, 12);
 
 --app user tickets
 insert into CLIENT_TICKET values (1, '2022-11-21', false, '2022-12-21', 1, 1, 1);

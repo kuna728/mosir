@@ -300,13 +300,9 @@ export default function NewAccountView() {
                                 <Controller name="zipCode" control={control}
                                             rules={{
                                                 required: REQUIRED_MESSAGE,
-                                                minLength: {
-                                                    value: 3,
-                                                    message: "Miasto powinno mieć minimum 3 znaki"
-                                                },
-                                                maxLength: {
-                                                    value: 50,
-                                                    message: "Miasto nie może mieć więcej niż 100 znaków"
+                                                pattern: {
+                                                    value: /^\d{2}-\d{3}$/,
+                                                    message: "Wprowadź poprawny kod pocztowy w formacie XX-XXX"
                                                 }
                                             }}
                                             render={({field}) => (

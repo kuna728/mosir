@@ -8,6 +8,7 @@ import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.edu.wat.student.i9g1s1.mosir.domain.ClientsMembershipCard;
 import pl.edu.wat.student.i9g1s1.mosir.domain.ClientsTicket;
@@ -19,7 +20,10 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 @Component
+@RequiredArgsConstructor
 public class QRCodeGenerator {
+
+    private final ObjectMapper objectMapper;
 
     public byte[] generateTicketQRCode(MosirUser user, ClientsTicket clientsTicket) throws IOException, WriterException {
         return generateTicketQRCode(new TicketQRCodeDTO(user, clientsTicket));
@@ -31,7 +35,6 @@ public class QRCodeGenerator {
 
     private byte[] generateTicketQRCode(TicketQRCodeDTO ticketQRCodeDTO) throws IOException, WriterException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        ObjectMapper objectMapper = new ObjectMapper();
         Hashtable hints = new Hashtable();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         BitMatrix bitMatrix = qrCodeWriter.encode(objectMapper.writeValueAsString(ticketQRCodeDTO), BarcodeFormat.QR_CODE, 250, 250, hints);

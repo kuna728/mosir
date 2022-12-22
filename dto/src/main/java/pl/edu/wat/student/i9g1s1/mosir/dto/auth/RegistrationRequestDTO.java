@@ -3,6 +3,7 @@ package pl.edu.wat.student.i9g1s1.mosir.dto.auth;
 import lombok.Getter;
 import lombok.Setter;
 import pl.edu.wat.student.i9g1s1.mosir.validator.AgeConstraint;
+import pl.edu.wat.student.i9g1s1.mosir.validator.PersonalIDConstraint;
 
 import javax.validation.constraints.*;
 
@@ -39,11 +40,25 @@ public class RegistrationRequestDTO {
     private String gender;
 
     @AgeConstraint(min = 13, max = 100)
+    @NotBlank
     private String dateOfBirth;
 
-//    private String nationalRegistryNumber;
-//    private String addressLine1;
-//    private String addressLine2;
-//    private String zipCode;
-//    private String city;
+    @PersonalIDConstraint
+    @NotBlank
+    private String nationalRegistryNumber;
+
+    @Size(min = 4, max = 100)
+    @NotBlank
+    private String addressLine1;
+
+    @Size(min = 4, max = 100)
+    private String addressLine2;
+
+    @Pattern(regexp = "^\\d{2}-\\d{3}$")
+    @NotBlank
+    private String zipCode;
+
+    @Size(min = 3, max = 50)
+    @NotBlank
+    private String city;
 }

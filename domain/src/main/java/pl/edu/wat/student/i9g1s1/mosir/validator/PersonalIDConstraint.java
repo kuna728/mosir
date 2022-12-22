@@ -7,8 +7,8 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = PeselValidator.class)
-public @interface PeselConstraint {
+@Constraint(validatedBy = PersonalIDValidator.class)
+public @interface PersonalIDConstraint {
     String message() default "Field is not a valid pesel number";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
