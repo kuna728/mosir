@@ -8,6 +8,7 @@ import pl.edu.wat.student.i9g1s1.mosir.AccountOperationTokenRepository;
 import pl.edu.wat.student.i9g1s1.mosir.UserRepository;
 import pl.edu.wat.student.i9g1s1.mosir.domain.AccountOperationToken;
 import pl.edu.wat.student.i9g1s1.mosir.domain.MosirUser;
+import pl.edu.wat.student.i9g1s1.mosir.dto.CommonStatusResponseDTO;
 import pl.edu.wat.student.i9g1s1.mosir.service.EmailService;
 
 import javax.mail.MessagingException;
@@ -21,31 +22,22 @@ import java.util.UUID;
 public class PasswordResetService {
 
     private final UserRepository userRepository;
-    private final AccountOperationTokenRepository tokenRepository;
+    private final AccountOperationTokenService tokenService;
     private final EmailService emailService;
 
-    public void sendPasswordResetEmail(String email) throws UsernameNotFoundException {
+    public CommonStatusResponseDTO sendPasswordResetEmail(String email) {
         Optional<MosirUser> user = userRepository.findByEmailAndIsActiveTrue(email);
         if(user.isEmpty())
-            throw new UsernameNotFoundException(email);
+            return CommonStatusResponseDTO.fromSingleError("email", "User with provided email does not exist");
 
-        AccountOperationToken token = new AccountOperationToken();
-        token.setUser(user.get());
-        token.setStatus(AccountOperationToken.TokenStatus.PENDING);
-        token.setOperationType(AccountOperationToken.OperationType.PASSWORD_RESET);
-        token.setCreated_at(LocalDateTime.now());
-        while(true) {
-            try {
-                token.setToken(UUID.randomUUID().toString());
-                tokenRepository.save(token);
-                break;
-            } catch (DataIntegrityViolationException ignored) {}
-        }
+        AccountOperationToken token = tokenService.generate(user.get(), AccountOperationToken.OperationType.PASSWORD_RESET);
 
         try {
             emailService.sendPasswordResetMail(user.get(), token);
+            return new CommonStatusResponseDTO(true, null);
         } catch (IOException | MessagingException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

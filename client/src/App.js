@@ -11,12 +11,12 @@ import CoachesView from "./app/views/guest/CoachesView/CoachesView";
 import TicketsView from "./app/views/guest/TicketsView/TicketsView";
 import HallsView from "./app/views/guest/HallsView";
 import EquipmentsView from "./app/views/guest/EquipmentsView";
-import LoginView from "./app/views/guest/LoginView";
+import LoginView from "./app/views/auth/LoginView";
 import BuyTicketView from "./app/views/user/BuyTicketView/BuyTicketView";
 import PrivateRoute from "./app/auth/PrivateRoute";
 import AuthProvider from "./app/auth/AuthProvider";
 import UserTicketsView from "./app/views/user/UserTicketsView";
-import NewAccountView from "./app/views/guest/NewAccountView";
+import NewAccountView from "./app/views/auth/NewAccountView";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 

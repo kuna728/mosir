@@ -3,6 +3,7 @@ package pl.edu.wat.student.i9g1s1.mosir.service.auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.student.i9g1s1.mosir.AccountOperationTokenRepository;
 import pl.edu.wat.student.i9g1s1.mosir.domain.AccountOperationToken;
 import pl.edu.wat.student.i9g1s1.mosir.domain.MosirUser;
@@ -18,7 +19,9 @@ public class AccountOperationTokenService {
 
     private final AccountOperationTokenRepository tokenRepository;
 
+    @Transactional
     public AccountOperationToken generate(MosirUser user, AccountOperationToken.OperationType operationType) {
+        tokenRepository.dropPendingTokens(user.getEmail(), operationType.toString());
         AccountOperationToken token = new AccountOperationToken();
         token.setUser(user);
         token.setStatus(AccountOperationToken.TokenStatus.PENDING);
@@ -48,5 +51,4 @@ public class AccountOperationTokenService {
         tokenRepository.save(token.get());
         return token.get();
     }
-
 }

@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.wat.student.i9g1s1.mosir.dto.CommonValidationErrorResponseDTO;
+import pl.edu.wat.student.i9g1s1.mosir.dto.CommonStatusResponseDTO;
 import pl.edu.wat.student.i9g1s1.mosir.dto.auth.*;
 import pl.edu.wat.student.i9g1s1.mosir.service.auth.AuthService;
 import pl.edu.wat.student.i9g1s1.mosir.service.auth.PasswordResetService;
@@ -51,7 +51,7 @@ public class AuthController {
     }
 
     @PostMapping("/reset/generate")
-    public ResponseEntity<Void> generateResetPasswordToken(@Valid @RequestBody GeneratePasswordResetTokenRequestDTO requestDTO) {
+    public ResponseEntity<CommonStatusResponseDTO> generateResetPasswordToken(@Valid @RequestBody GeneratePasswordResetTokenRequestDTO requestDTO) {
         try {
             passwordResetService.sendPasswordResetEmail(requestDTO.getEmail());
         } catch (UsernameNotFoundException e) {
@@ -62,7 +62,7 @@ public class AuthController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public CommonValidationErrorResponseDTO handleValidationExceptions(
+    public CommonStatusResponseDTO handleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
@@ -70,7 +70,7 @@ public class AuthController {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return new CommonValidationErrorResponseDTO(false, errors);
+        return new CommonStatusResponseDTO(false, errors);
     }
 
 }
