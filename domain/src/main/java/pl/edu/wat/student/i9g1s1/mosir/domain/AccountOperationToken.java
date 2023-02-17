@@ -20,6 +20,7 @@ public class AccountOperationToken {
     public enum OperationType {ACTIVATION, PASSWORD_RESET}
 
     @Column(name = "operation_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private OperationType operationType;
 
     @Column(name = "token", length = 128, nullable = false, unique = true)
@@ -28,6 +29,7 @@ public class AccountOperationToken {
     public enum TokenStatus {PENDING, DROPPED, USED}
 
     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private TokenStatus status;
 
     @ManyToOne
