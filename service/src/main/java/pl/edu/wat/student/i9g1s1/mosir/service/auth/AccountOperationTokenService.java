@@ -9,6 +9,7 @@ import pl.edu.wat.student.i9g1s1.mosir.domain.MosirUser;
 import pl.edu.wat.student.i9g1s1.mosir.service.auth.exception.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +20,7 @@ public class AccountOperationTokenService {
     private final AccountOperationTokenRepository tokenRepository;
 
     public AccountOperationToken generate(MosirUser user, AccountOperationToken.OperationType operationType) {
+        dropOtherTokens(user, operationType);
         AccountOperationToken token = new AccountOperationToken();
         token.setUser(user);
         token.setStatus(AccountOperationToken.TokenStatus.PENDING);
@@ -43,10 +45,24 @@ public class AccountOperationTokenService {
             throw new UsedOperationTokenException();
         if(token.get().getStatus() == AccountOperationToken.TokenStatus.DROPPED)
             throw new DroppedOperationTokenException();
-
-        token.get().setStatus(AccountOperationToken.TokenStatus.USED);
-        tokenRepository.save(token.get());
         return token.get();
+    }
+
+    public AccountOperationToken validateAndUse(String tokenString, AccountOperationToken.OperationType operationType) throws OperationTokenException {
+        AccountOperationToken token = validate(tokenString, operationType);
+        token.setStatus(AccountOperationToken.TokenStatus.USED);
+        tokenRepository.save(token);
+        return token;
+    }
+
+    private void dropOtherTokens(MosirUser user, AccountOperationToken.OperationType operationType) {
+        List<AccountOperationToken> tokens = tokenRepository.findAllByUserAndOperationTypeAndStatus(user, operationType, AccountOperationToken.TokenStatus.PENDING);
+        if(tokens.size() > 0) {
+            for(AccountOperationToken token : tokens) {
+                token.setStatus(AccountOperationToken.TokenStatus.DROPPED);
+            }
+            tokenRepository.saveAll(tokens);
+        }
     }
 
 }

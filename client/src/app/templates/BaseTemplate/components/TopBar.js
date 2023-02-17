@@ -61,6 +61,7 @@ function TopBar() {
 
     const handleLogoutButtonClick = () => {
         auth.logout();
+        setAnchorElRight(null);
         navigate("/");
     }
 
@@ -157,51 +158,48 @@ function TopBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0}}>
-                        {auth.role === ROLE_GUEST ? (
                             <Button
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: 'white',display: auth.role === ROLE_GUEST ? "block" : "none" }}
                                 onClick={() => navigate("/logowanie")}
                             >
                                 Logowanie
                             </Button>
-                        ) : (
-                            <div>
-                                <IconButton
-                                    size="large"
-                                    onClick={handleOpenRightMenu}
-                                    color="inherit"
-                                >
-                                <AccountCircle />
-                                </IconButton>
-                                <Menu
-                                    id="right-menu"
-                                    anchorEl={anchorElRight}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(anchorElRight)}
-                                    onClose={handleCloseRightMenu}
-                                >
-                                    <MenuItem sx={{borderBottom: "1px solid black"}} onClick={() => navigate('/moje-konto')}>
-                                        <Typography textAlign="center" fontWeight="bold">{auth.legalName}</Typography>
+                        <Box sx={{display: auth.role !== ROLE_GUEST ? "block" : "none"}}>
+                            <IconButton
+                                size="large"
+                                onClick={handleOpenRightMenu}
+                                color="inherit"
+                            >
+                            <AccountCircle />
+                            </IconButton>
+                            <Menu
+                                id="right-menu"
+                                anchorEl={anchorElRight}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElRight)}
+                                onClose={handleCloseRightMenu}
+                                display={auth.role !== ROLE_GUEST ? "block" : "none"}
+                            >
+                                <MenuItem sx={{borderBottom: "1px solid black"}} onClick={() => navigate('/moje-konto')}>
+                                    <Typography textAlign="center" fontWeight="bold">{auth.legalName}</Typography>
+                                </MenuItem>
+                                {user_pages.map((page) => (
+                                    <MenuItem key={page.label} onClick={() => handleMenuButtonClick(page.href)}>
+                                        <Typography textAlign="center">{page.label}</Typography>
                                     </MenuItem>
-                                    {user_pages.map((page) => (
-                                        <MenuItem key={page.label} onClick={() => handleMenuButtonClick(page.href)}>
-                                            <Typography textAlign="center">{page.label}</Typography>
-                                        </MenuItem>
-                                    ))}
-                                    <MenuItem onClick={handleLogoutButtonClick}>
-                                        <Typography textAlign="center">Wyloguj</Typography>
-                                    </MenuItem>
-                                </Menu>
-                            </div>
-                        )}
+                                ))}
+                                <MenuItem onClick={handleLogoutButtonClick}>
+                                    <Typography textAlign="center">Wyloguj</Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
                     </Box>
                 </Toolbar>
             </Container>

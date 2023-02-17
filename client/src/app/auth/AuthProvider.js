@@ -1,6 +1,8 @@
 import React from "react";
-import {BASE_URL, ROLE_GUEST} from "../utils/constans";
+import {BASE_URL, ROLE_GUEST, ROLE_USER} from "../utils/constans";
 import {AuthContext} from "./AuthContext";
+import AccountNotActiveError from "./AccountNotActiveError";
+import RoleNotUserError from "./RoleNotUserError";
 
 export default function AuthProvider({children}) {
     const [role, setRole] = React.useState(localStorage.getItem("role") || ROLE_GUEST);
@@ -17,6 +19,12 @@ export default function AuthProvider({children}) {
         throw new Error(res.status);
     }).then(json => {
         if(json.success) {
+            if(!json.isActive) {
+                throw new AccountNotActiveError();
+            }
+            if(json.role !== ROLE_USER) {
+                throw new RoleNotUserError();
+            }
             setRole(json.role);
             setLegalName(`${json.firstName} ${json.lastName}`);
             setToken(json.token);

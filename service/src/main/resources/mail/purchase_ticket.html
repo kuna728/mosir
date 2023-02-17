@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!--    https://github.com/leemunroe/responsive-html-email-template-->
+<!--    https://github.com/leemunroe/responsive-html-email-template-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Simple Transactional Email</title>
@@ -334,7 +334,8 @@
     </style>
 </head>
 <body>
-<span class="preheader">Otrzymaliśmy żądanie zmiany hasła w mosirze dla tego adresu</span>
+<span th:unless="${ticketType == 'MULTI'}" class="preheader">Dziękujemy za zakup biletu</span>
+<span th:if="${ticketType == 'MULTI'}" class="preheader">Dziękujemy za zakup karnetu</span>
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
     <tr>
         <td>&nbsp;</td>
@@ -352,23 +353,11 @@
                                     <td>
                                         <img th:src="${'data:image/jpg;base64,' + banner}" style="width: 150px; max-height: 63px; margin-bottom: 20px" />
                                         <p>Witaj <span th:text="${legalName}" /> ,</p>
-                                        <p>Otrzymaliśmy prośbę o zmianę hasła dla tego adresu e-mail. Kliknij przycisk poniżej aby zresetować hasło.</p>
-                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                                            <tbody>
-                                            <tr>
-                                                <td align="left">
-                                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td> <a th:href="${actionUrl}" target="_blank">Resetuj hasło</a> </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p>Link do zmiany hasla jest ważny do <span th:text="${expirationDate}"/>.</p>
+                                        <p>Dziękujemy za zakup <span th:if="${ticketType == 'MULTI'}"><span th:text="${totalUsages}"/> wejściowego karnetu </span>
+                                            <span th:unless="${ticketType == 'MULTI'}">jednorazowego biletu</span> na zajęcia <b><span th:text="${activityType}" /></b>.
+                                            Transakcja na kwotę <b><span th:text="${price}" /> PLN</b> została zarejestrowana w naszym systemie dnia <span th:text="${purchasedAtDate}"/> o godzinie
+                                            <span th:text="${purchasedAtTime}"/>. Bilet jest ważny do <span th:text="${validTill}"/>.</p>
+                                        <p>W załącznikach znajduję się faktura oraz bilet z kodem QR, który jest niezbędny do wejścia na obiekt.</p>
                                         <p>Do zobaczenia na zajęciach!</p>
                                     </td>
                                 </tr>
@@ -386,7 +375,6 @@
                         <tr>
                             <td class="content-block">
                                 <span class="apple-link">MOSIR Sp. z o.o, Sportowa 29, 07-568 Warszawa</span>
-                                <br>Zignoruj tą wiadomość, jeżeli nie żądałeś resetu hasła
                             </td>
                         </tr>
                     </table>

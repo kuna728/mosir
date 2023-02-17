@@ -247,8 +247,15 @@ insert into MOSIR_USER values (12, 'Test', 'test', 'Test', '1998-10-07', 'test@g
 insert into CLIENT values (2, 12);
 
 --app user tickets
-insert into CLIENT_TICKET values (1, '2022-11-21', false, '2022-12-21', 1, 1, 1);
-insert into CLIENT_TICKET values (2, '2022-11-22T11:52:13', false, '2022-12-22T11:52:13', 1, 1, 1);
+insert into CLIENT_TICKET values (1, '2022-11-21', true, '2022-12-21', 1, 1, 1);
+insert into CLIENT_TICKET values (2, '2022-11-22T11:52:13', true, '2022-12-22T11:52:13', 1, 1, 1);
+insert into CLIENT_TICKET values (3, '2022-11-23', false, '2022-12-23', 1, 1, 2);
+insert into CLIENT_TICKET values (4, '2022-11-24', false, '2022-12-24', 1, 1, 5);
+insert into CLIENT_TICKET values (5, '2022-11-27', true, '2022-12-27', 1, 1, 3);
+insert into CLIENT_TICKET values (6, '2022-12-01', false, '2023-01-01', 1, 1, 5);
+insert into CLIENT_TICKET values (7, '2022-12-05', false, '2023-01-05', 1, 1, 8);
+insert into CLIENT_TICKET values (8, '2022-12-26', false, '2023-01-06', 1, 1, 4);
+insert into CLIENT_TICKET values (9, '2023-01-08', false, '2023-02-08', 1, 1, 6);
 
 --app user membership cards
 insert into CLIENT_MEMBERSHIP_CARD values (1, 2, '2022-10-17', '2023-10-17', 1, 4, 2);

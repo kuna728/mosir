@@ -64,7 +64,7 @@ export default function Footer() {
                     </Grid>
                     <Grid item xs={12} md={6} order={{xs: 5, md: 4}}>
                         <Typography variant="subtitle2" sx={{color: "#808080", textAlign: {xs: "center", md: "left"}}} component="p">
-                            &#169; 2022 MOSIR. Wszystkie prawa zastrzeżone.
+                            &#169; 2023 MOSIR. Wszystkie prawa zastrzeżone.
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={6} order={{xs: 4, md: 5}}>

@@ -5,17 +5,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.edu.wat.student.i9g1s1.mosir.ClientRepository;
 import pl.edu.wat.student.i9g1s1.mosir.UserRepository;
 import pl.edu.wat.student.i9g1s1.mosir.domain.AccountOperationToken;
 import pl.edu.wat.student.i9g1s1.mosir.domain.Client;
 import pl.edu.wat.student.i9g1s1.mosir.domain.MosirUser;
-import pl.edu.wat.student.i9g1s1.mosir.dto.auth.AccountActivationResponse;
-import pl.edu.wat.student.i9g1s1.mosir.dto.auth.AuthResponseDTO;
-import pl.edu.wat.student.i9g1s1.mosir.dto.auth.RegistrationRequestDTO;
-import pl.edu.wat.student.i9g1s1.mosir.dto.auth.RegistrationResponseDTO;
-import pl.edu.wat.student.i9g1s1.mosir.service.EmailService;
+import pl.edu.wat.student.i9g1s1.mosir.dto.auth.*;
+import pl.edu.wat.student.i9g1s1.mosir.service.email.EmailService;
 import pl.edu.wat.student.i9g1s1.mosir.service.auth.exception.*;
 
 import javax.mail.MessagingException;
@@ -34,6 +34,7 @@ public class AuthService {
     private final ClientRepository clientRepository;
     private final EmailService emailService;
     private final AccountOperationTokenService tokenService;
+    private final MosirUserDetailsService userDetailsService;
 
     public AuthResponseDTO authenticate(String username, String password) throws BadCredentialsException{
         MosirUserPrincipal user = (MosirUserPrincipal) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password)).getPrincipal();
@@ -48,8 +49,6 @@ public class AuthService {
         Map<String, String> errors = registrationValidationService.validate(registrationRequestDTO);
         if(!errors.isEmpty()) {
             ret.setErrors(errors);
-
-
             ret.setSuccess(false);
             return ret;
         }
@@ -69,22 +68,32 @@ public class AuthService {
         return ret;
     }
 
-    public AccountActivationResponse activateAccount(String tokenString) {
+    public AccountActivationResponseDTO activateAccount(String tokenString) {
         try {
-            AccountOperationToken token = tokenService.validate(tokenString, AccountOperationToken.OperationType.ACTIVATION);
+            AccountOperationToken token = tokenService.validateAndUse(tokenString, AccountOperationToken.OperationType.ACTIVATION);
             MosirUser user = token.getUser();
+            if(user.getIsActive())
+                throw new UsedOperationTokenException();
             user.setIsActive(true);
             userRepository.save(user);
-            return new AccountActivationResponse(AccountActivationResponse.AccountActivationStatus.SUCCESS);
+            return new AccountActivationResponseDTO(true, null);
         } catch (InvalidOperationTokenException e) {
-            return new AccountActivationResponse(AccountActivationResponse.AccountActivationStatus.INVALID_TOKEN);
+            return new AccountActivationResponseDTO(false, TokenVerificationResponseDTO.TokenStatus.INVALID);
         } catch (ExpiredOperationTokenException e) {
-            return new AccountActivationResponse(AccountActivationResponse.AccountActivationStatus.EXPIRED_TOKEN);
+            return new AccountActivationResponseDTO(false, TokenVerificationResponseDTO.TokenStatus.EXPIRED);
         } catch (UsedOperationTokenException e) {
-            return new AccountActivationResponse(AccountActivationResponse.AccountActivationStatus.USED_TOKEN);
+            return new AccountActivationResponseDTO(false, TokenVerificationResponseDTO.TokenStatus.USED);
         } catch (OperationTokenException e) {
-            return new AccountActivationResponse(AccountActivationResponse.AccountActivationStatus.DROPPED_TOKEN);
+            return new AccountActivationResponseDTO(false, TokenVerificationResponseDTO.TokenStatus.DROPPED);
         }
+    }
+
+    public void resendActivationMail(String usernameOrEmail) throws UsernameNotFoundException, IllegalStateException, MessagingException, IOException {
+        MosirUserPrincipal userPrincipal = (MosirUserPrincipal) userDetailsService.loadUserByUsername(usernameOrEmail);
+        if(userPrincipal.getUser().getIsActive())
+            throw new IllegalStateException();
+        AccountOperationToken token = tokenService.generate(userPrincipal.getUser(), AccountOperationToken.OperationType.ACTIVATION);
+        emailService.sendAccountActivationMail(userPrincipal.getUser(), token);
     }
 
     public MosirUserPrincipal getCurrentUser() {
@@ -95,7 +104,8 @@ public class AuthService {
         MosirUser user = new MosirUser();
         user.setIsActive(false);
         user.setUsername(registrationRequestDTO.getUsername());
-        user.setPassword(registrationRequestDTO.getPassword());
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(registrationRequestDTO.getPassword()));
         user.setFirstName(registrationRequestDTO.getFirstName());
         user.setLastName(registrationRequestDTO.getLastName());
         user.setGender(registrationRequestDTO.getGender().equalsIgnoreCase("w") ?

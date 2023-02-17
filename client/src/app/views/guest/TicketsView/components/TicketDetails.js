@@ -13,7 +13,7 @@ export default function TicketDetails({ticket, isMembershipCard}) {
             <Stack>
                 {ticket.discountTypes.filter(discountType => discountType.name !== "normalny").map(discountType => (
                     <Typography variant="body1" key={discountType.id}>
-                        {capitalizeFirstLetter(discountType.name)}&nbsp;
+                        {capitalizeFirstLetter(discountType.name)}&nbsp;kuna728
                         <b>{parseFloat(Number(discountType.value * ticket.price).toFixed(2))},-</b>&nbsp;
                         ({discountType.value * 100}%)
                     </Typography>

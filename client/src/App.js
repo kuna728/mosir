@@ -15,10 +15,13 @@ import LoginView from "./app/views/guest/LoginView";
 import BuyTicketView from "./app/views/user/BuyTicketView/BuyTicketView";
 import PrivateRoute from "./app/auth/PrivateRoute";
 import AuthProvider from "./app/auth/AuthProvider";
-import UserTicketsView from "./app/views/user/UserTicketsView";
+import UserTicketsView from "./app/views/user/UserTicketsView/UserTicketsView";
 import NewAccountView from "./app/views/guest/NewAccountView";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import ResetPasswordView from "./app/views/guest/ResetPasswordView";
+import ChangePasswordView from "./app/views/guest/ChangePasswordView";
+import ActivateAccountView from "./app/views/guest/ActivateAccountView";
 
 function App() {
 
@@ -45,8 +48,9 @@ function App() {
                         <Route path="/sprzet-sportowy" exact element={<EquipmentsView />} />
                         <Route path="/logowanie" exact element={<LoginView />} />
                         <Route path="/rejestracja" exact element={<NewAccountView />} />
-                        <Route path="/resetuj-haslo" exact element={<ErrorView status={NOT_IMPLEMENTED} />} />
-                        <Route path="/logowanie" exact element={<LoginView />} />
+                        <Route path="/aktywuj-konto" exact element={<ActivateAccountView />} />
+                        <Route path="/resetuj-haslo" exact element={<ResetPasswordView />} />
+                        <Route path="/zmien-haslo" exact element={<ChangePasswordView />} />
 
                         {/*USER VIEWS*/}
                         <Route element={<PrivateRoute accessLevel={ROLE_USER} /> } >

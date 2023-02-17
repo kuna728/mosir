@@ -1,9 +1,11 @@
 import React, {useContext} from "react";
 import {
+    Alert,
     Box,
     Checkbox,
+    Link as LinkMUI,
     FormControlLabel,
-    Grid,
+    Grid, IconButton,
     Paper,
     Stack,
     TextField,
@@ -13,13 +15,20 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../auth/AuthContext";
 import LoadingButton from '@mui/lab/LoadingButton';
 import {Controller, useForm} from "react-hook-form";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import AccountNotActiveError from "../../auth/AccountNotActiveError";
+import {BASE_URL} from "../../utils/constans";
+import RoleNotUserError from "../../auth/RoleNotUserError";
 
 export default function LoginView() {
 
-    const [result, setResult] = React.useState(null);
+    const [result, setResult] = React.useState({severity: null, message: null});
+    const [needsActivation, setNeedsActivation] = React.useState(false);
+    const [activationEmailResend, setActivationEmailResend] = React.useState({success: null, message: null});
     const [isLoading, setLoading] = React.useState(false);
+    const [showPassword, setShowPassword] = React.useState(false);
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, watch, formState: { errors } } = useForm({
         defaultValues: {
             username: "",
             password: "",
@@ -33,19 +42,42 @@ export default function LoginView() {
     const location = useLocation();
 
     const handleLogin = (data) => {
-        console.log(data)
         const {username, password, rememberMe} = data
         setLoading(true);
-        setResult(null);
         auth.login(username, password, rememberMe).then(isSuccess => {
             setLoading(false);
             if(isSuccess)
                 navigate(location.state && location.state.next ? location.state.next : "/moje-bilety");
             else
-                setResult("Podano zły login lub hasło")
+                setResult({severity: "error", message: "Podano zły login lub hasło"})
         }).catch(e => {
             setLoading(false);
-            setResult("Coś poszło nie tak. Spróbuj ponownie później.")
+            if(e instanceof AccountNotActiveError) {
+                setNeedsActivation(true);
+            } else if (e instanceof RoleNotUserError) {
+                setResult({severity: "warning", message: "Portal na ten moment nie obsługuję kont pracowników. Jeżeli chcesz sprawdzić bilet klienta to możesz pobrać aplikację mobilną."});
+            } else {
+                setResult({severity: "error", message: "Coś poszło nie tak. Spróbuj ponownie później."});
+            }
+        })
+    }
+
+    const handleActivationEmailResend = () => {
+        setLoading(true);
+        fetch(BASE_URL + "/api/auth/activate/resend", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({username: watch('username')})
+        }).then(res => {
+            setLoading(false);
+            if(res.ok) {
+                setActivationEmailResend({success: true, message: "Wiadomość email z linkiem aktywacyjnym została wysłana"});
+                return;
+            }
+            throw new Error();
+        }).catch(() => {
+            setLoading(false);
+            setActivationEmailResend({success: false, message: "Wiadomość email z linkiem aktywacyjnym nie mogła zostać wysłana, spróbuj ponownie później"});
         })
     }
 
@@ -59,7 +91,20 @@ export default function LoginView() {
                             <Typography variant="h3" component="h3" gutterBottom sx={{fontWeight: "300"}}>
                                 Logowanie
                             </Typography>
-                            { result && <Typography color="#d32f2f" variant="subtitle">{result}</Typography>}
+                            {activationEmailResend.message && (
+                                <Alert severity={activationEmailResend.success ? "success" : "error"}>
+                                    {activationEmailResend.message}
+                                </Alert>
+                            )}
+                            { needsActivation && !activationEmailResend.success && (
+                                <Alert severity="warning">
+                                    Konto nie zostało aktywowane, aby je aktywować kliknij w link wysłany na adres email podany przy rejestracji.
+                                    Jeżeli wiadomość nie dotarła, lub link wygasł kliknij
+                                    <LinkMUI onClick={handleActivationEmailResend} >&nbsp;tutaj&nbsp;</LinkMUI>
+                                    aby wygenerować nowy link.
+                                </Alert>
+                            )}
+                            { result.message && <Alert severity={result.severity}>{result.message}</Alert> }
                             <Controller name="username" control={control}
                                         rules={{
                                             required: "Pole jest wymagane",
@@ -75,7 +120,7 @@ export default function LoginView() {
                                         render={({field}) => (
                                             <TextField type="text" label="Login lub e-mail" variant="outlined"
                                                        error={errors.username} helperText={errors.username?.message}
-                                                       {...field}
+                                                       {...field} disabled={needsActivation}
                                             />
                                         )}
                             />
@@ -92,9 +137,21 @@ export default function LoginView() {
                                             }
                                         }}
                                         render={({field}) => (
-                                            <TextField type="password" label="Hasło" variant="outlined"
-                                                       error={errors.password} helperText={errors.password?.message}
-                                                       {...field}
+                                            <TextField
+                                                label="Hasło" type={showPassword ? 'text' : 'password'} fullWidth
+                                                error={errors.password} helperText={errors.password?.message} {...field}
+                                                disabled={needsActivation}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={() => setShowPassword(!showPassword)}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    ),
+                                                }}
                                             />
                                         )}
                             />
@@ -102,7 +159,7 @@ export default function LoginView() {
                                 <Controller name="rememberMe" control={control}
                                             render={({field}) => (
                                                 <FormControlLabel control={<Checkbox {...field}/>}
-                                                                  label="Zapamiętaj mnie"
+                                                                  label="Zapamiętaj mnie" disabled={needsActivation}
                                                 />
                                             )}
                                 />
@@ -110,7 +167,9 @@ export default function LoginView() {
                                     <Link to="/resetuj-haslo">Nie pamiętasz hasła?</Link>
                                 </Typography>
                             </Box>
-                            <LoadingButton loading={isLoading} variant="contained" size="large" onClick={handleSubmit(handleLogin)}>
+                            <LoadingButton loading={isLoading} variant="contained" size="large" type="submit"
+                                           disabled={needsActivation} onClick={handleSubmit(handleLogin)}
+                            >
                                 Zaloguj
                             </LoadingButton>
                             <Typography display={{xs: "block", md: "none"}} sx={{color: '#42a5f5'}}>
